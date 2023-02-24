@@ -9,7 +9,7 @@ with open(r"C:\Users\Soumyadip Nandi\Downloads\policy\language\text.txt", 'r', e
 # Create a dictionary to map each word to a unique index
 word2idx = {word: idx for idx, word in enumerate(vocab)}
 
-encode = lambda s: [word2idx[c] for c in s]
+# encode = lambda s: [word2idx[c] for c in s] 
 
 
 # Define a function to convert a list of words to a list of indices
