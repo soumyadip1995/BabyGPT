@@ -1,6 +1,6 @@
 ## language models
 
-Trying to build language models from scratch to develop intuition. Will slowly scale up to transformers.
+Trying to build language models from scratch to develop intuition. Will slowly scale up to transformers. A toy implementation of a bigram language model and n gram language model has been included above.
 
 ### TO DO
 
