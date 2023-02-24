@@ -5,6 +5,6 @@ Trying to build language models from scratch to develop intuition. Will slowly s
 ### TO DO
 
 - Tensor Manipulations need to be done.
-- Understand Attention mechanisms. Self attention and Multi Head attention.
+- Understand Attention mechanisms. Scaled Dot product attention. Also keep updating the document.
 
 You can run the above for now. ```text.txt ``` is based on Eminem's Rap God.
