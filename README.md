@@ -13,5 +13,6 @@ Trying to build language models from scratch to develop intuition. Will slowly s
 - Encoder - Decoder architecture needs to be explored.
 - Work on the encoder side of the architecture.( Multi head self attention and a  feedforward layer.)
 - Then move onto the decoder side of things.
+- Also, document the above.
 
 You can run the above for now. ```text.txt ``` is based on Eminem's Rap God.
