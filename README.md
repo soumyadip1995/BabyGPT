@@ -7,7 +7,8 @@ Trying to build language models from scratch to develop intuition. Will slowly s
 ### TO DO
 
 - Tensor Manipulations need to be done. Tensor ops Need to be explored. Received attention and value tensors . 
-- Develop intuition as to how to make use of it further in a bigram or an n-gram model. 
+- Develop intuition as to how to make use of it further in a bigram or an n-gram model.
+- Tensor ops on ngram and bigram models. On multi head attention.
 
 - Understand Attention mechanisms. Scaled Dot product attention. Also keep updating the document.
 - Encoder - Decoder architecture needs to be explored.
