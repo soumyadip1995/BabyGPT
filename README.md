@@ -6,8 +6,9 @@ Trying to build language models from scratch to develop intuition. Will slowly s
 
 ### TO DO
 
-- Tensor Manipulations need to be done. Tensor ops Need to be explored. Received attention and value tensors . 
-- A preliminary multi head attention has been added. needs cleaning up. A single head attention has been added.
+- :done: Tensor Manipulations need to be done. Tensor ops Need to be explored. Received attention and value tensors . 
+- :done: A preliminary multi head attention has been added. needs cleaning up. A single head attention has been added.
+- A feedforward layer on the encoder side needs to be added.
 - Develop intuition as to how to make use of it further in a bigram or an n-gram model.
 - Tensor ops on ngram and bigram models. On multi head attention.
 
