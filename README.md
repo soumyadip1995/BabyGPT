@@ -10,6 +10,7 @@ Trying to build language models from scratch to develop intuition. Will slowly s
 - :heavy_check_mark: A preliminary multi head attention has been added. needs cleaning up. A single head attention has been added.
 - :heavy_check_mark: A feedforward layer on the encoder side has been added.
 - :heavy_check_mark: A Transformer Encoder layer has been added.
+- :heavy_check_mark: Positional Embedding has been added.
 - Develop intuition as to how to make use of it further in a bigram or an n-gram model.
 - Tensor ops on ngram and bigram models. On multi head attention.
 
