@@ -11,6 +11,7 @@ Trying to build language models from scratch to develop intuition. Will slowly s
 - :heavy_check_mark: A feedforward layer on the encoder side has been added.
 - :heavy_check_mark: A Transformer Encoder layer has been added.
 - :heavy_check_mark: Positional Embedding has been added.
+- :heavy_check_mark: An implementation of a GPT has been done.
 - Develop intuition as to how to make use of it further in a bigram or an n-gram model.
 - Tensor ops on ngram and bigram models. On multi head attention.
 
