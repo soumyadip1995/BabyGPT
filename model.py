@@ -95,11 +95,11 @@ class MultiHeadAttention(nn.Module):
 
     return out
 
-multihead_attention = MultiHeadAttention(128, 8)
-# multihead_attention
+# multihead_attention = MultiHeadAttention(128, 8)
+# # multihead_attention
 
-attention_outputs =  multihead_attention(input_embeds)
-# print(attention_outputs.size())
+# attention_outputs =  multihead_attention(input_embeds)
+# # print(attention_outputs.size())
 
 
 # from karpathy , partially
