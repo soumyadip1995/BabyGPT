@@ -156,34 +156,6 @@ class BabyGPTmodel(nn.Module):
     attn_logits = self.ln_head(x)
     return attn_logits
 
-
-
-
-
-X, Y = [], []
-# iterate over the sequence and grab every consecutive 3 bits
-# the correct label for what's next is the next bit at each position
-for i in range(len(data) - block_size):
-    X.append(data[i:i+block_size])
-    Y.append(data[i+block_size])
-    print(f"example {i+1:2d}: {X[-1]} --> {Y[-1]}")
-X = torch.tensor(X, dtype=torch.long)
-Y = torch.tensor(Y, dtype=torch.long)
-print(X.shape, Y.shape)
-
-embedded_dim = 32
-num_heads = 8
-
-torch.manual_seed(1337)
-gpt = BabyGPTmodel(vocab_size, block_size, embedded_dim, num_heads, d_k)
-optimizer = torch.optim.AdamW(gpt.parameters(), lr=1e-3, weight_decay=1e-1)
-
-for i in range(50):
-    logits = gpt(X)
-    loss = F.cross_entropy(logits, Y)
-    loss.backward()
-    optimizer.step()
-    optimizer.zero_grad()
-    print(i, loss.item())
-
-print("Training data sequence:")
+gpt = BabyGPTmodel(vocab_size, block_size, 32, 8, 32)
+d = gpt(x)
+d.size()
