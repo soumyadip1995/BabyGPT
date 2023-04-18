@@ -12,7 +12,8 @@ Trying to build language models from scratch to develop intuition. Will slowly s
 - :heavy_check_mark: A Transformer Encoder layer has been added.
 - :heavy_check_mark: Positional Embedding has been added.
 - :heavy_check_mark: An implementation of a GPT has been done.
-- A model of a basic transformer has been added.
+- A model of a basic transformer has been added. A babyGPT model has been added. Training also done. 
+- Need to update Readme later on.
 - The GPT notebook has been added.  Refactoring of the original notebook needs to be done.
 - Develop intuition as to how to make use of it further in a bigram or an n-gram model.
 - Tensor ops on ngram and bigram models. On multi head attention.
