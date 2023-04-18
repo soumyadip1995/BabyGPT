@@ -2,7 +2,8 @@
 
 Trying to build language models from scratch to develop intuition. Will slowly scale up to transformers. A toy implementation of a bigram language model and n gram language model has been included above. 
 
-- A very basic implementation of a scaled dot product attention has been done.  Notebook has been added. Added a new section called demystifying queries keys and values.
+
+
 
 ### TO DO
 
