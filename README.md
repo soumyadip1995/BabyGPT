@@ -7,13 +7,13 @@ Building on the intuition of Karpathy's [ng-video-lectures](https://github.com/k
 1. [Bigram Language Model](https://github.com/soumyadip1995/language-models/blob/main/bigram_lm.py).
 2. [N-gram Language Model](https://github.com/soumyadip1995/language-models/blob/main/ngram_lm.py).
      
-#### Attention Mechanisms
+#### 2. Attention Mechanisms
 1. [Dot product attention](https://github.com/soumyadip1995/language-models/blob/main/Attention/dot_product_attention.py)
 2. [Multi headed attention](https://github.com/soumyadip1995/language-models/blob/main/Attention/multi_headed_attention.py)
 3. [Cross Attention](https://github.com/soumyadip1995/language-models/blob/main/Attention/cross_attention.py)
 4. [Spatial Attention](https://github.com/soumyadip1995/language-models/blob/main/Attention/spatial_attention.py)
     
-#### Transformers
+#### 3. Transformers
 1. [GPTs from Scratch](https://github.com/soumyadip1995/language-models/blob/main/Notebook/GPT_from_scratch.ipynb)
 2. [Spatial Transformers](https://github.com/soumyadip1995/language-models/blob/main/Notebook/Spatialtransformer.ipynb)
 3. [Transformer model](https://github.com/soumyadip1995/language-models/blob/main/model.py)
