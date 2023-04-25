@@ -106,6 +106,7 @@ class BabyGPTmodel(nn.Module):
     logits = self.ln_head(x[:, -1, :])
     return logits
 
+
 words = open(r"C:\Users\Soumyadip Nandi\Downloads\policy\input.txt", 'r', encoding='utf-8').read().split()
 
 chars = sorted(list(set(words)))
@@ -140,8 +141,8 @@ num_layers = 4
 gpt = BabyGPTmodel(vocab_size, block_size, num_layers, embedded_dim, num_heads)
 ## number of parameters: 860,326
 
-optimizer = torch.optim.AdamW(gpt.parameters(), lr=1e-3, weight_decay=1e-1)
 
+optimizer = torch.optim.AdamW(gpt.parameters(), lr=1e-3, weight_decay=1e-1)
 
 ## Training
 for i in range(1000):
@@ -151,3 +152,8 @@ for i in range(1000):
     optimizer.step()
     optimizer.zero_grad()
     print(i, loss.item())
+
+
+# generate from the model
+# context = torch.zeros((1, 1), dtype=torch.long)
+# print(decode((context)[0].tolist()))
