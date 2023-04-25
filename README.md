@@ -1,25 +1,26 @@
-## language models
+## BabyGPT
 
-Trying to build language models from scratch to develop intuition. Will slowly scale up to transformers. A toy implementation of a bigram language model and n gram language model has been included above. 
+Building on the intuition of Karpathy's [ng-video-lectures](https://github.com/karpathy/ng-video-lecture/blob/master/gpt.py), BabyGPT provides a working model of a GPT on a much smaller scale (around 24k parametres). BabyGPT has been built from a [toyGPT](https://github.com/soumyadip1995/language-models/blob/main/Notebook/GPT_from_scratch.ipynb)(860k parametres) which was made to build transformers from scratch. It has been scaled down , as you will see below. A detaied explanation covering each aspect has been provided below. We scale up to transformers from simple Language models, attention mechanisms and finally BabyGPT.
 
+## Table of Contents.
+#### 1. Simple Language Models
+1. [Bigram Language Model](https://github.com/soumyadip1995/language-models/blob/main/bigram_lm.py).
+2. [N-gram Language Model](https://github.com/soumyadip1995/language-models/blob/main/ngram_lm.py).
+     
+#### Attention Mechanisms
+1. [Dot product attention](https://github.com/soumyadip1995/language-models/blob/main/Attention/dot_product_attention.py)
+2. [Multi headed attention](https://github.com/soumyadip1995/language-models/blob/main/Attention/multi_headed_attention.py)
+3. [Cross Attention](https://github.com/soumyadip1995/language-models/blob/main/Attention/cross_attention.py)
+4. [Spatial Attention](https://github.com/soumyadip1995/language-models/blob/main/Attention/spatial_attention.py)
+    
+#### Transformers
+1. [GPTs from Scratch](https://github.com/soumyadip1995/language-models/blob/main/Notebook/GPT_from_scratch.ipynb)
+2. [Spatial Transformers](https://github.com/soumyadip1995/language-models/blob/main/Notebook/Spatialtransformer.ipynb)
+3. [Transformer model](https://github.com/soumyadip1995/language-models/blob/main/model.py)
+4. [BabyGPT](https://github.com/soumyadip1995/language-models/blob/main/Notebook/BabyGPT.ipynb)
 
 
 
 ### TO DO
 
-- :heavy_check_mark: Tensor Manipulations need to be done. Tensor ops Need to be explored. Received attention and value tensors . 
-- :heavy_check_mark: A preliminary multi head attention has been added. needs cleaning up. A single head attention has been added.
-- :heavy_check_mark: A feedforward layer on the encoder side has been added.
-- :heavy_check_mark: A Transformer Encoder layer has been added.
-- :heavy_check_mark: Positional Embedding has been added.
-- :heavy_check_mark: An implementation of a GPT has been done.
-- A model of a basic transformer has been added. A babyGPT model has been added. Training also done. 
-- Need to update Readme later on.
-- The GPT notebook has been added.  
-- Develop intuition as to how to make use of it further in a bigram or an n-gram model.
-- Tensor ops on ngram and bigram models. On multi head attention.
-
-
-- Also, document the above.
-
-You can run the above for now. ```text.txt ``` is based on Eminem's Stan.
+```text.txt ``` is based on Eminem's Stan.
