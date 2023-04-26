@@ -1,6 +1,61 @@
 ## BabyGPT
 
-Building on the intuition of Karpathy's [ng-video-lectures](https://github.com/karpathy/ng-video-lecture/blob/master/gpt.py), BabyGPT provides a working model of a GPT on a much smaller scale (around 24k parametres). BabyGPT has been built from a [toyGPT](https://github.com/soumyadip1995/language-models/blob/main/Notebook/GPT_from_scratch.ipynb) which was made to understand transformers from scratch. It has been scaled down , as you will see below. A detaied explanation covering each aspect has been provided below. We scale up to transformers from simple Language models, attention mechanisms and finally BabyGPT.
+Building on the intuition of Karpathy's [ng-video-lectures](https://github.com/karpathy/ng-video-lecture/blob/master/gpt.py), BabyGPT provides a working model of a GPT on a much smaller scale (around 24k parametres). BabyGPT has been built from a [toyGPT](https://github.com/soumyadip1995/language-models/blob/main/Notebook/GPT_from_scratch.ipynb) which was made to understand transformers from scratch. It has been scaled down , as you will see below. A detailed explanation covering each aspect has been provided below. We scale up to transformers from simple Language models, attention mechanisms and finally BabyGPT.
+
+It goes bigram_lm, ngram_lm ---> Attention ---> gpt from scratch ---> babygpt.
+
+### Files
+
+```
+BabyGPT
+├── bigram_lm.py
+├── ngram_lm.py
+├── model.py
+├── Attention
+│   ├── dot product attention.py
+│   ├── multi headed attention.py
+│   ├── cross attention.py
+│   ├── spatial attention.py
+├── Notebook
+│   ├── Dot product attention
+│   ├── multiheaded attention
+│   ├── gpt from scratch
+│   ├── spatial transformer
+│   ├── babyGPT
+├── transformers
+|   ├── model.py
+│   ├── babyGPT.py
+├── text.txt
+
+```
+
+
+### Run
+
+To run the bigram and ngram language models.
+```python bigram_lm.py ``` and ```python ngram_lm.py ```.
+
+To run babygpt
+```python babygpt.py``` from transformers folder.
+
+To run a simple transformer model
+```python model.py``` 
+
+#### Running the notebooks
+
+
+| Notebook                    | Description |
+| -----------                 | ----------- |
+| Dot product attention       | [colab](https://colab.research.google.com/github/soumyadip1995/language-models/blob/main/Notebook/dot_product_attention.ipynb)|
+| Multi headed attention      | [colab](https://colab.research.google.com/github/soumyadip1995/language-models/blob/main/Notebook/Multi_head_attention.ipynb)|
+| GPT from scratch            | [colab](https://colab.research.google.com/github/soumyadip1995/language-models/blob/main/Notebook/GPT_from_scratch.ipynb)|
+| Spatial Transformers        | [colab](https://github.com/soumyadip1995/language-models/blob/main/Notebook/Spatialtransformer.ipynb)|
+| BabyGPT                     | [colab](https://github.com/soumyadip1995/language-models/blob/main/Notebook/BabyGPT.ipynb)|
+
+
+
+```text.txt ``` is based on Eminem's Stan. 
+
 
 ## Table of Contents.
 #### 1. Simple Language Models
@@ -16,11 +71,12 @@ Building on the intuition of Karpathy's [ng-video-lectures](https://github.com/k
 #### 3. Transformers
 1. [GPTs from Scratch](https://github.com/soumyadip1995/language-models/blob/main/Notebook/GPT_from_scratch.ipynb)
 2. [Spatial Transformers](https://github.com/soumyadip1995/language-models/blob/main/Notebook/Spatialtransformer.ipynb)
-3. [Transformer model](https://github.com/soumyadip1995/language-models/blob/main/model.py)
+3. [Simple Transformer model](https://github.com/soumyadip1995/language-models/blob/main/model.py)
 4. [BabyGPT](https://github.com/soumyadip1995/language-models/blob/main/Notebook/BabyGPT.ipynb)
 
 
 
 ### TO DO
+If somebody could write the generate() method for babygpt, that would be helpful.
 
-```text.txt ``` is based on Eminem's Stan.
+
