@@ -5,6 +5,25 @@ from torch.nn import functional as F
 from math import sqrt
 
 
+words = open(r"C:\Users\Soumyadip Nandi\Downloads\policy\input.txt", 'r', encoding='utf-8').read().split()
+
+chars = sorted(list(set(words)))
+string2integer = {ch: i for i, ch in enumerate(chars)}
+
+
+integer2string = {i:ch for ch,i in string2integer.items()}
+encode = lambda s: [string2integer[c] for c in s]
+
+decode = lambda l: ''.join([integer2string[i] for i in l])
+data = torch.tensor(encode(words), dtype = torch.long)
+
+
+vocab_size = len(chars)
+block_size = 4
+batch_size = 16
+embedded_dim = 16
+num_heads = 4
+num_layers = 4
 
 torch.manual_seed(1337)
 class Attention(nn.Module):
@@ -106,25 +125,6 @@ class BabyGPTmodel(nn.Module):
     logits = self.ln_head(x[:, -1, :])
     return logits
 
-
-words = open(r"C:\Users\Soumyadip Nandi\Downloads\policy\input.txt", 'r', encoding='utf-8').read().split()
-
-chars = sorted(list(set(words)))
-string2integer = {ch: i for i, ch in enumerate(chars)}
-
-
-integer2string = {i:ch for ch,i in string2integer.items()}
-encode = lambda s: [string2integer[c] for c in s]
-
-decode = lambda l: ''.join([integer2string[i] for i in l])
-data = torch.tensor(encode(words), dtype = torch.long)
-
-batch_size = 16
-block_size = 4
-embedded_dim = 16
-num_heads = 4
-num_layers = 4
-
 # generate a small batch of data of inputs x and targets y
 
 ix = torch.randint(len(data) - block_size, (batch_size,))
@@ -132,16 +132,8 @@ x = torch.stack([data[i:i+block_size] for i in ix])
 y = torch.stack([data[i+block_size] for i in ix])
 # print((x, y))
 
-vocab_size = len(chars)
-block_size = 4
-embedded_dim = 16
-num_heads = 4
-num_layers = 4
 
 gpt = BabyGPTmodel(vocab_size, block_size, num_layers, embedded_dim, num_heads)
-## number of parameters: 860,326
-
-
 optimizer = torch.optim.AdamW(gpt.parameters(), lr=1e-3, weight_decay=1e-1)
 
 ## Training
@@ -157,3 +149,4 @@ for i in range(1000):
 # generate from the model
 # context = torch.zeros((1, 1), dtype=torch.long)
 # print(decode((context)[0].tolist()))
+## samplinf from the probability distribution is added in the notebook.
