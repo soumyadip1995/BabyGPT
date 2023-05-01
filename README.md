@@ -82,5 +82,6 @@ To run a simple transformer model
 1. If somebody could write the generate() method for babygpt, that would be helpful.
 2. Building an Attention Engine.
 3. The LoRa model needs more modification.
+4. LoRa notebook to be added.
 
 
