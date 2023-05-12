@@ -54,6 +54,7 @@ To run a simple transformer model
 | GPT from scratch            | [colab](https://colab.research.google.com/github/soumyadip1995/language-models/blob/main/Notebook/GPT_from_scratch.ipynb) (Approx 860k parametres)|
 | Spatial Transformers        | [colab](https://github.com/soumyadip1995/language-models/blob/main/Notebook/Spatialtransformer.ipynb)|
 | BabyGPT                     | [colab](https://github.com/soumyadip1995/language-models/blob/main/Notebook/BabyGPT.ipynb)(Approx 28k parametres)|
+| LoRa                    | [colab](https://github.com/soumyadip1995/BabyGPT/blob/main/Notebook/lora.ipynb)(Approx 15k parametres). less than babygpt|
 
 
 
@@ -82,7 +83,6 @@ To run a simple transformer model
 ### TO DO
 1. If somebody could write the generate() method for babygpt, that would be helpful.
 2. Building an Attention Engine.
-3. The LoRa model needs more modification.
-4. LoRa notebook to be added.
+3. llama support to be added.
 
 
