@@ -1,10 +1,10 @@
 ## BabyGPT
 
-Building on the intuition of Karpathy's [ng-video-lectures](https://github.com/karpathy/ng-video-lecture/blob/master/gpt.py), BabyGPT provides a working model of a GPT on a much smaller scale (around 28k parametres). BabyGPT has been built from a [toyGPT](https://github.com/soumyadip1995/language-models/blob/main/Notebook/GPT_from_scratch.ipynb) which was made to understand transformers from scratch. It has been scaled down , as you will see below. A detailed explanation covering each aspect has been provided below. We scale up to transformers from simple Language models, attention mechanisms and finally BabyGPT. 
+Building on the intuition of Karpathy's [ng-video-lectures](https://github.com/karpathy/ng-video-lecture/blob/master/gpt.py), BabyGPT provides a working model of a GPT on a much smaller scale (around 28k parametres). BabyGPT has been built from a [toyGPT](https://github.com/soumyadip1995/language-models/blob/main/Notebook/GPT_from_scratch.ipynb) which was made to understand transformers from scratch. It has been scaled down , as you will see below. A detailed explanation covering each aspect has been provided below. We scale up to transformers from simple Language models, attention mechanisms and finally BabyGPT. While [toyGPT](https://github.com/soumyadip1995/language-models/blob/main/Notebook/GPT_from_scratch.ipynb) has been built by separating all the layers of a transformer indiviually. In BabyGPT, the attention mechanism is implemented manually. 
 
 It goes bigram_lm, ngram_lm ---> Attention ---> gpt from scratch ---> babygpt.
 
-Low rank approximation improves parametre efficiency. A LoRa model has been added(15k parametres) less thn BabyGPT..!!.
+Low rank approximation improves parametre efficiency. A LoRa_model.py has been added(15k parametres) less thn BabyGPT..!!. All, we need to do is to compute a rank parametre and compute the attention accordingly. In the [LoRa notebook](https://github.com/soumyadip1995/BabyGPT/blob/main/Notebook/lora.ipynb, an estimation of FLOPs has been done according to the chinchilla paper.
 
 ### Files
 
