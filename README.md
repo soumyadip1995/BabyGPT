@@ -4,7 +4,7 @@ Building on the intuition of Karpathy's [ng-video-lectures](https://github.com/k
 
 It goes bigram_lm, ngram_lm ---> Attention ---> gpt from scratch ---> babygpt.
 
-Low rank approximation improves parametre efficiency. A LoRa_model.py has been added(15k parametres) less thn BabyGPT..!!. All, we need to do is to compute a rank parametre and compute the attention accordingly. In the [LoRa notebook](https://github.com/soumyadip1995/BabyGPT/blob/main/Notebook/lora.ipynb, an estimation of FLOPs has been done according to the chinchilla paper.
+Low rank approximation improves parametre efficiency. A LoRa_model.py has been added(15k parametres) less thn BabyGPT..!!. All, we need to do is to compute a rank parametre and compute the attention accordingly. In the [LoRa notebook](https://github.com/soumyadip1995/BabyGPT/blob/main/Notebook/lora.ipynb), an estimation of FLOPs has been done according to the chinchilla paper.
 
 ### Files
 
