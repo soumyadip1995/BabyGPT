@@ -10,7 +10,8 @@ Low rank approximation improves parametre efficiency. A LoRa_model.py has been a
 
 ### We support Lit llama for BabyGPT :zap:
 
-An implemetation of the [lit-llama](https://github.com/Lightning-AI/lit-llama) model has been added to BabyGPT. It still needs a bit more modification. You can find the notebook here -> [llama_implementation](https://github.com/soumyadip1995/BabyGPT/blob/main/Notebook/llama_implementation.ipynb)
+An implemetation of the [lit-llama](https://github.com/Lightning-AI/lit-llama) model has been added to BabyGPT. It still needs a bit more modification. You can find the notebook here -> [llama_implementation](https://github.com/soumyadip1995/BabyGPT/blob/main/Notebook/llama_implementation.ipynb) . Run the model 
+```python llama_model.py```. If someone could write the generate() , that would be awesome.
 
 ### Files
 
