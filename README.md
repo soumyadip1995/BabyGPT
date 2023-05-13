@@ -1,10 +1,16 @@
-## BabyGPT
+## BabyGPT :baby_chick:
 
-Building on the intuition of Karpathy's [ng-video-lectures](https://github.com/karpathy/ng-video-lecture/blob/master/gpt.py), BabyGPT provides a working model of a GPT on a much smaller scale (around 28k parametres). BabyGPT has been built from a [toyGPT](https://github.com/soumyadip1995/language-models/blob/main/Notebook/GPT_from_scratch.ipynb) which was made to understand transformers from scratch. It has been scaled down , as you will see below. A detailed explanation covering each aspect has been provided below. We scale up to transformers from simple Language models, attention mechanisms and finally BabyGPT. While [toyGPT](https://github.com/soumyadip1995/language-models/blob/main/Notebook/GPT_from_scratch.ipynb) has been built by separating all the layers of a transformer indiviually. In BabyGPT, the attention mechanism is implemented manually. 
+Building on the intuition of Karpathy's [ng-video-lectures](https://github.com/karpathy/ng-video-lecture/blob/master/gpt.py), BabyGPT provides a working model of a GPT on a much smaller scale (around 28k parametres). BabyGPT has been built from a [toyGPT](https://github.com/soumyadip1995/language-models/blob/main/Notebook/GPT_from_scratch.ipynb) which was made to understand transformers from scratch. It has been scaled down , as you will see below. Visit the notebooks. We scale up to transformers from simple Language models, attention mechanisms and finally BabyGPT. While [toyGPT](https://github.com/soumyadip1995/language-models/blob/main/Notebook/GPT_from_scratch.ipynb) has been built by separating all the layers of a transformer indiviually. In BabyGPT, the attention mechanism is implemented manually. 
+The purpose of building smaller GPTs is to understand transformer functions at the bit level.
 
 It goes bigram_lm, ngram_lm ---> Attention ---> gpt from scratch ---> babygpt.
 
-Low rank approximation improves parametre efficiency. A LoRa_model.py has been added(15k parametres) less thn BabyGPT..!!. All, we need to do is to compute a rank parametre and compute the attention accordingly. In the [LoRa notebook](https://github.com/soumyadip1995/BabyGPT/blob/main/Notebook/lora.ipynb), an estimation of FLOPs has been done according to the chinchilla paper.
+Low rank approximation improves parametre efficiency. A LoRa_model.py has been added(15k parametres) less than BabyGPT..!!. All, we need to do is to compute a rank parametre and compute the attention accordingly. In the [LoRa notebook](https://github.com/soumyadip1995/BabyGPT/blob/main/Notebook/lora.ipynb), an estimation of FLOPs has been done according to the chinchilla paper.
+
+
+### We support Lit llama for BabyGPT :zap:
+
+An implemetation of the [lit-llama](https://github.com/Lightning-AI/lit-llama) model has been added to BabyGPT. It still needs a bit more modification. You can find the notebook here -> [llama_implementation](https://github.com/soumyadip1995/BabyGPT/blob/main/Notebook/llama_implementation.ipynb)
 
 ### Files
 
@@ -25,6 +31,8 @@ BabyGPT
 │   ├── gpt from scratch
 │   ├── spatial transformer
 │   ├── babyGPT
+│   ├── LoRa
+│   ├── llama_implementation
 ├── transformers
 |   ├── model.py
 │   ├── babyGPT.py
@@ -43,6 +51,10 @@ To run babygpt
 
 To run a simple transformer model
 ```python model.py``` 
+To run a low rank approximation model
+```python LoRa_model.py```
+
+Run the different attention mechanisms from [Attention]() folder
 
 #### Running the notebooks
 
@@ -55,13 +67,14 @@ To run a simple transformer model
 | Spatial Transformers        | [colab](https://github.com/soumyadip1995/language-models/blob/main/Notebook/Spatialtransformer.ipynb)|
 | BabyGPT                     | [colab](https://github.com/soumyadip1995/language-models/blob/main/Notebook/BabyGPT.ipynb)(Approx 28k parametres)|
 | LoRa                    | [colab](https://github.com/soumyadip1995/BabyGPT/blob/main/Notebook/lora.ipynb)(Approx 15k parametres). less than babygpt|
+| lit-llama for BabyGPT                   | [colab](https://github.com/soumyadip1995/BabyGPT/blob/main/Notebook/llama_implementation.ipynb)(Approx 30k parametres)|
 
 
 
 ```text.txt ``` is based on Eminem's Stan. 
 
 
-## Table of Contents.
+
 #### 1. Simple Language Models
 1. [Bigram Language Model](https://github.com/soumyadip1995/language-models/blob/main/bigram_lm.py).
 2. [N-gram Language Model](https://github.com/soumyadip1995/language-models/blob/main/ngram_lm.py).
@@ -78,11 +91,15 @@ To run a simple transformer model
 3. [Simple Transformer model](https://github.com/soumyadip1995/language-models/blob/main/model.py)
 4. [BabyGPT](https://github.com/soumyadip1995/language-models/blob/main/Notebook/BabyGPT.ipynb)
 
+#### 4. Others
+1. [Low rank approximation](https://github.com/soumyadip1995/BabyGPT/blob/main/Notebook/lora.ipynb)
+2. [llama implementation](https://github.com/soumyadip1995/BabyGPT/blob/main/Notebook/llama_implementation.ipynb)
+
 
 
 ### TO DO
 1. If somebody could write the generate() method for babygpt, that would be helpful.
 2. Building an Attention Engine.
-3. llama support to be added.
+3. lit llama support needs more modification.
 
 
