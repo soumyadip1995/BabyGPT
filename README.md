@@ -54,7 +54,7 @@ To run a simple transformer model
 To run a low rank approximation model
 ```python LoRa_model.py```
 
-Run the different attention mechanisms from [Attention]() folder
+Run the different attention mechanisms from [Attention](https://github.com/soumyadip1995/BabyGPT/tree/main/Attention) folder
 
 #### Running the notebooks
 
