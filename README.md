@@ -57,6 +57,9 @@ To run a low rank approximation model
 
 Run the different attention mechanisms from [Attention](https://github.com/soumyadip1995/BabyGPT/tree/main/Attention) folder
 
+### Data
+The [data](https://github.com/soumyadip1995/BabyGPT/tree/main/data) folder contains the text document whioch has the lyrics to all of Eminem's songs.
+
 #### Running the notebooks
 
 
