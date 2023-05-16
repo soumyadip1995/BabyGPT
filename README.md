@@ -5,6 +5,8 @@ The purpose of building smaller GPTs is to understand transformer functions at t
 
 It goes bigram_lm, ngram_lm ---> Attention ---> gpt from scratch ---> babygpt.
 
+### Low rank approximation
+
 Low rank approximation improves parametre efficiency. A LoRa_model.py has been added(15k parametres) less than BabyGPT..!!. All, we need to do is to compute a rank parametre and compute the attention accordingly. In the [LoRa notebook](https://github.com/soumyadip1995/BabyGPT/blob/main/Notebook/lora.ipynb), an estimation of FLOPs has been done according to the [chinchilla paper](https://arxiv.org/pdf/2203.15556.pdf).
 
 
