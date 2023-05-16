@@ -36,7 +36,7 @@ llama_configs = {
 ### other hyperparametres
 
 batch_size = 64 
-max_iters = 1000
+max_iters = 11000
 learning_rate = 3e-4
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 eval_interval = 500
