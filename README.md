@@ -42,11 +42,12 @@ BabyGPT
 |   ├── transformer_model.py
 │   ├── babyGPT.py
 ├── text.txt
+├── trainer.ipynb
 
 ```
 
 
-### Run
+### Run :running:
 
 To run the bigram and ngram language models.
 ```python bigram_lm.py ``` and ```python ngram_lm.py ```.
@@ -73,7 +74,7 @@ from the [train](https://github.com/soumyadip1995/BabyGPT/tree/main/train) folde
 
 Both have been trained on the Tesla T4 GPUs. You can increase or decrease the values of max_iters according to your wish. Takes a few minutes to train.
 
-### Results
+### Results :clipboard:
 
 You can see the result from both the models in the [trainer](https://github.com/soumyadip1995/BabyGPT/blob/main/trainer.ipynb) notebook.
 
