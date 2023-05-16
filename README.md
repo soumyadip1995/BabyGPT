@@ -125,7 +125,7 @@ The [data](https://github.com/soumyadip1995/BabyGPT/tree/main/data) folder conta
 | BabyGPT                     | [colab](https://github.com/soumyadip1995/language-models/blob/main/Notebook/BabyGPT.ipynb)(Approx 28k parametres)|
 | LoRa                    | [colab](https://github.com/soumyadip1995/BabyGPT/blob/main/Notebook/lora.ipynb)(Approx 15k parametres). less than babygpt|
 | lit-llama for BabyGPT                   | [colab](https://github.com/soumyadip1995/BabyGPT/blob/main/Notebook/llama_implementation.ipynb)(Approx 28k parametres)|
-
+| trainer for Babygpt and llama                   | [colab](https://github.com/soumyadip1995/BabyGPT/blob/main/trainer.ipynb)(Approx 16k parametres)|
 
 
 ```text.txt ``` is based on Eminem's Stan. 
