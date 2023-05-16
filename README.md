@@ -11,7 +11,7 @@ Low rank approximation improves parametre efficiency. A LoRa_model.py has been a
 ### We support Lit llama for BabyGPT :zap:
 
 An implemetation of the [lit-llama](https://github.com/Lightning-AI/lit-llama) model has been added to BabyGPT. It still needs a bit more modification. You can find the notebook here -> [llama_implementation](https://github.com/soumyadip1995/BabyGPT/blob/main/Notebook/llama_implementation.ipynb) . Run the model 
-```python llama_model.py```. If someone could write the generate() , that would be awesome.
+```python llama_model.py```. Training and generating tokens has been provided below.
 
 ### Files
 
@@ -21,6 +21,7 @@ BabyGPT
 ├── ngram_lm.py
 ├── model.py
 ├── Lora_model.py
+├── Llama_model.py
 ├── Attention
 │   ├── dot product attention.py
 │   ├── multi headed attention.py
@@ -34,8 +35,11 @@ BabyGPT
 │   ├── babyGPT
 │   ├── LoRa
 │   ├── llama_implementation
+├── Train
+|	├── babygpt_trainer.py
+|	├── llama_trainer.py
 ├── transformers
-|   ├── model.py
+|   ├── transformer_model.py
 │   ├── babyGPT.py
 ├── text.txt
 
@@ -57,7 +61,7 @@ To run a low rank approximation model
 
 Run the different attention mechanisms from [Attention](https://github.com/soumyadip1995/BabyGPT/tree/main/Attention) folder.
 
-### Train and Generate
+### Train and Generate :running:
 
 
 If you wish to get started on  BabyGPT and llama , but don't want to go through all the hassle of knowing about transformer models, you can simply start by running the code from the train folder.
@@ -67,12 +71,48 @@ To train and generate text from both BabyGPT model and the LLaMA model. Run
 ```python babygpt_trainer.py ``` and ```python llama_trainer.py ```
 from the [train](https://github.com/soumyadip1995/BabyGPT/tree/main/train) folder.
 
-Both have been trained on the Tesla T4 GPUs. You can increase or decrease the values of max_iters according to your wish.
+Both have been trained on the Tesla T4 GPUs. You can increase or decrease the values of max_iters according to your wish. Takes a few minutes to train.
+
+### Results
+
+You can see the result from both the models in the [trainer](https://github.com/soumyadip1995/BabyGPT/blob/main/trainer.ipynb) notebook.
+
+#### Result from the llama trainer.
+
+```
+``` number of parameters: 16221 ```
+step 0: train loss 4.6937, val loss 4.6937
+step 500: train loss 3.1929, val loss 3.1976
+step 1000: train loss 2.7869, val loss 2.7994
+.
+.
+.
+step 10999: train loss 2.2015, val loss 2.2009
+
+Oh a he spoments
+Ohs and whet me.0
+Jay, Dre hanf inche, buh, I'm herere a win'
+So to saiidid
+I I'mf neved, I donse efy fake'ind merile (I'd nobqu cad-shegeds..]
+Get withank to I what baut the gudin' I'm no]
+Now oun the cuckedid in
+I gine we dey (Be be doup I cloe that in a treve I ack pith my!
+I gine we dey (Be be doup I cloe that in a treve I ack pith my!
+?
+Thhide was ueves sueel The ray heB*Red, yeu the me won beall you cham?
+This if to my ona um a lating ut Dof'
+Just to to sarse mighior mey (namale me
+Heats to ine Ack moy t'
+She good whene core pruting yo
+```
+
+Seems like the model converges a bit, towards the end. Maybe that will need more modification. 
+Spitting some Eminem yo..:smile:
 
 ### Data
 The [data](https://github.com/soumyadip1995/BabyGPT/tree/main/data) folder contains the text document whioch has the lyrics to all of Eminem's songs.
 
-#### Running the notebooks
+### Running the notebooks
 
 
 | Notebook                    | Description |
@@ -112,10 +152,20 @@ The [data](https://github.com/soumyadip1995/BabyGPT/tree/main/data) folder conta
 2. [llama implementation](https://github.com/soumyadip1995/BabyGPT/blob/main/Notebook/llama_implementation.ipynb)
 
 
+### Acknowledgements
+
+1. Pytorch GPT tutorial
+2. Karpathy's youtube videos and tutorials
+3. Karpathy's Mingpt
+4. O' reilly notes for NLP
+5. lit-llama repository.
+6. llama from facebook
+7. chinchilla paper
+8. karpathy's nn zero to hero.
 
 ### TO DO
-1. If somebody could write the generate() method for babygpt, that would be helpful.
-2. Building an Attention Engine.
-3. lit llama support needs more modification.
+
+1. Building an Attention Engine.
+
 
 
