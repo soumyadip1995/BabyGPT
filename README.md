@@ -3,6 +3,9 @@
 Building on the intuition of Karpathy's [ng-video-lectures](https://github.com/karpathy/ng-video-lecture/blob/master/gpt.py) and [mingpt](https://github.com/soumyadip1995/minGPT/blob/master/mingpt), BabyGPT provides a working model of a GPT on a much smaller scale (around 28k parametres, fine-tuned). BabyGPT has been built from a [toyGPT](https://github.com/soumyadip1995/language-models/blob/main/Notebook/GPT_from_scratch.ipynb) which was made to understand transformers from scratch. It has been scaled down , as you will see below. Visit the notebooks. We scale up to transformers from simple Language models, attention mechanisms and finally BabyGPT. While [toyGPT](https://github.com/soumyadip1995/language-models/blob/main/Notebook/GPT_from_scratch.ipynb) has been built by separating all the layers of a transformer indiviually. In BabyGPT, the attention mechanism is implemented manually. 
 The purpose of building smaller GPTs is to understand transformer functions at the bit level.
 
+
+
+
 It goes bigram_lm, ngram_lm ---> Attention ---> gpt from scratch ---> babygpt.
 
 ### Low rank approximation
@@ -59,15 +62,19 @@ To run babygpt
 
 To run a simple transformer model
 ```python transformer_model.py``` 
+
 To run a low rank approximation model
 ```python LoRa_model.py```
+
+To run the llama model
+```python llama_model.py```
 
 Run the different attention mechanisms from [Attention](https://github.com/soumyadip1995/BabyGPT/tree/main/Attention) folder.
 
 ### Train and Generate :running:
 
 
-If you wish to get started on  BabyGPT and llama , but don't want to go through all the hassle of knowing about transformer models, you can simply start by running the code from the train folder.
+If you wish to get started on  BabyGPT and llama , but don't want to go through all the hassle of knowing all about transformer models, you can simply start by running the code from the train folder.
 
 
 To train and generate text from both BabyGPT model and the LLaMA model. Run
@@ -113,7 +120,7 @@ Seems like the model converges a bit, towards the end. Maybe that will need more
 Spitting some Eminem yo..:smile:
 
 ### Data
-The [data](https://github.com/soumyadip1995/BabyGPT/tree/main/data) folder contains the text document whioch has the lyrics to all of Eminem's songs.
+The [data](https://github.com/soumyadip1995/BabyGPT/tree/main/data) folder contains the text document which has the lyrics to all of Eminem's songs.
 
 ### Running the notebooks
 
