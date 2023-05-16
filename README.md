@@ -51,11 +51,23 @@ To run babygpt
 ```python babygpt.py``` from transformers folder.
 
 To run a simple transformer model
-```python model.py``` 
+```python transformer_model.py``` 
 To run a low rank approximation model
 ```python LoRa_model.py```
 
-Run the different attention mechanisms from [Attention](https://github.com/soumyadip1995/BabyGPT/tree/main/Attention) folder
+Run the different attention mechanisms from [Attention](https://github.com/soumyadip1995/BabyGPT/tree/main/Attention) folder.
+
+### Train and Generate
+
+
+If you wish to get started on  BabyGPT and llama , but don't want to go through all the hassle of knowing about transformer models, you can simply start by running the code from the train folder.
+
+
+To train and generate text from both BabyGPT model and the LLaMA model. Run
+```python babygpt_trainer.py ``` and ```python llama_trainer.py ```
+from the [train](https://github.com/soumyadip1995/BabyGPT/tree/main/train) folder.
+
+Both have been trained on the Tesla T4 GPUs. You can increase or decrease the values of max_iters according to your wish.
 
 ### Data
 The [data](https://github.com/soumyadip1995/BabyGPT/tree/main/data) folder contains the text document whioch has the lyrics to all of Eminem's songs.
