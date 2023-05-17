@@ -62,7 +62,7 @@ To run the bigram and ngram language models.
 ```python bigram_lm.py ``` and ```python ngram_lm.py ```.
 
 To run babygpt
-```python babygpt.py``` from transformers folder.
+```transformers\python babygpt.py``` from transformers folder.
 
 To run a simple transformer model
 ```python transformer_model.py``` 
@@ -82,7 +82,7 @@ If you wish to get started on  BabyGPT and llama , but don't want to go through 
 
 
 To train and generate text from both BabyGPT model and the LLaMA model. Run
-```python babygpt_trainer.py ``` and ```python llama_trainer.py ```
+```train\python babygpt_trainer.py ``` and ```train\python llama_trainer.py ```
 from the [train](https://github.com/soumyadip1995/BabyGPT/tree/main/train) folder.
 
 Both have been trained on the Tesla T4 GPUs. You can increase or decrease the values of max_iters according to your wish. Takes a few minutes to train.
@@ -145,26 +145,6 @@ The [data](https://github.com/soumyadip1995/BabyGPT/tree/main/data) folder conta
 
 
 
-#### 1. Simple Language Models
-1. [Bigram Language Model](https://github.com/soumyadip1995/language-models/blob/main/bigram_lm.py).
-2. [N-gram Language Model](https://github.com/soumyadip1995/language-models/blob/main/ngram_lm.py).
-     
-#### 2. Attention Mechanisms
-1. [Dot product attention](https://github.com/soumyadip1995/language-models/blob/main/Attention/dot_product_attention.py)
-2. [Multi headed attention](https://github.com/soumyadip1995/language-models/blob/main/Attention/multi_headed_attention.py)
-3. [Cross Attention](https://github.com/soumyadip1995/language-models/blob/main/Attention/cross_attention.py)
-4. [Spatial Attention](https://github.com/soumyadip1995/language-models/blob/main/Attention/spatial_attention.py)
-    
-#### 3. Transformers
-1. [GPTs from Scratch](https://github.com/soumyadip1995/language-models/blob/main/Notebook/GPT_from_scratch.ipynb)
-2. [Spatial Transformers](https://github.com/soumyadip1995/language-models/blob/main/Notebook/Spatialtransformer.ipynb)
-3. [Simple Transformer model](https://github.com/soumyadip1995/language-models/blob/main/model.py)
-4. [BabyGPT](https://github.com/soumyadip1995/language-models/blob/main/Notebook/BabyGPT.ipynb)
-
-#### 4. Others
-1. [Low rank approximation](https://github.com/soumyadip1995/BabyGPT/blob/main/Notebook/lora.ipynb)
-2. [llama implementation](https://github.com/soumyadip1995/BabyGPT/blob/main/Notebook/llama_implementation.ipynb)
-
 
 ### Acknowledgements
 
@@ -176,6 +156,7 @@ The [data](https://github.com/soumyadip1995/BabyGPT/tree/main/data) folder conta
 6. llama from facebook
 7. chinchilla paper
 8. karpathy's nn zero to hero.
+9. Lightning AI for Low rank Approximation.
 
 ### TO DO
 
