@@ -6,11 +6,11 @@ The purpose of building smaller GPTs is to understand transformer functions at t
 
 ### The Roadmap
 
-If you wish to understand the nitty gritty of how babygpt works from scratch, this roadmap will guide you. We start from implementing simple language models and work our way up to building transformers and finally babyGPT. 
+If you wish to understand the nitty gritty of how transformers  work from scratch, this roadmap will guide you. We start from implementing simple language models and work our way up to building transformers , a GPT from scratch and then finally babyGPT. 
 
-![alt_text](https://github.com/soumyadip1995/BabyGPT/blob/main/image/img2.jpg)
+![alt_text](https://github.com/soumyadip1995/BabyGPT/blob/main/image/img3.jpg)
 
-We implement a Low rank approximation as well as lit-lama  to improve babyGPT. We finally train the models and generate tokens.
+We implement a Low rank approximation as well as lit-lama  to  babyGPT as well. We finally train the models and generate tokens.
 
 ### Low rank approximation
 
