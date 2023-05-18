@@ -4,7 +4,7 @@ Building on the intuition of Karpathy's [ng-video-lectures](https://github.com/k
 The purpose of building smaller GPTs is to understand transformer functions at the bit level.
 
 
-### The Roadmap :rocket:
+## The Roadmap :rocket:
 
 If you wish to understand the nitty gritty of how transformers  work from scratch, this roadmap will guide you. We start from implementing simple language models and work our way up to building transformers , a GPT from scratch and then finally babyGPT. 
 
@@ -12,17 +12,23 @@ If you wish to understand the nitty gritty of how transformers  work from scratc
 
 We implement a Low rank approximation as well as lit-lama  to  babyGPT as well. We finally train the models and generate tokens.
 
-### Low rank approximation
+## Low rank approximation
 
 Low rank approximation improves parametre efficiency. A LoRa_model.py has been added(15k parametres) less than BabyGPT..!!. All, we need to do is to compute a rank parametre and compute the attention accordingly. In the [LoRa notebook](https://github.com/soumyadip1995/BabyGPT/blob/main/Notebook/lora.ipynb), an estimation of FLOPs has been done according to the [chinchilla paper](https://arxiv.org/pdf/2203.15556.pdf).
 
 
-### We support Lit llama for BabyGPT :zap:
+## We support Lit llama for BabyGPT :zap: :zap:
 
 An implemetation of the [lit-llama](https://github.com/Lightning-AI/lit-llama) model has been added to BabyGPT. It still needs a bit more modification. You can find the notebook here -> [llama_implementation](https://github.com/soumyadip1995/BabyGPT/blob/main/Notebook/llama_implementation.ipynb) . Run the model 
 ```python llama_model.py```. Training and generating tokens has been provided below.
 
-### Files
+### LLaMA with MFU :zap:
+
+We need efficient memory usage for LLMs. Hardware accelerators use a technique called Hardware FLOP Utilization to create efficient trade-offs between memory usage and compute. This is typically done using an estimate of the ratio of FLOPs observed on a given
+device to its theoretical peak FLOPs. MFU is the ratio of the observed throughput (tokens-per-second), relative to the theoretical maximum throughput of a system operating at peak FLOPs. The theoretical peak matmul of Tesla T4 is around 8.1 TFLOPS. Hence, we calculate the MFU of the LLaMA trainer model. We receive a MFU of : 0.0000490951% for around 16k parametres. This would of course increase as the number of parametres increases. For a 530B parametre model, MPU is around 30% on A100 GPUs. We use Section B from the [PaLM](https://arxiv.org/pdf/2204.02311.pdf) paper for reference.
+
+
+## Files
 
 ```
 BabyGPT
@@ -56,7 +62,13 @@ BabyGPT
 ```
 
 
-### Run :running:
+## Run :running:
+
+Clone the Repo and run the following:
+
+```
+! git clone https://github.com/soumyadip1995/BabyGPT.git
+```
 
 To run the bigram and ngram language models.
 ```python bigram_lm.py ``` and ```python ngram_lm.py ```.
@@ -120,7 +132,7 @@ Heats to ine Ack moy t'
 She good whene core pruting yo
 ```
 
-Seems like the model converges a bit, towards the end. Maybe that will need more modification. 
+Seems like the model converges a bit early, towards the end. Maybe that will need more modification. 
 Spitting some Eminem yo..:smile:
 
 ### Data
