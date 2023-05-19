@@ -172,7 +172,8 @@ The [data](https://github.com/soumyadip1995/BabyGPT/tree/main/data) folder conta
 
 ### TO DO
 
-1. Building an Attention Engine.
+1. Building A tokenizer and quantization.
+2. Building an attention Engine
 
 
 
