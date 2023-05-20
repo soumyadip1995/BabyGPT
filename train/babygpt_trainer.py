@@ -264,4 +264,4 @@ torch.save(model.state_dict(), 'C:/Users/Soumyadip Nandi/Downloads/policy/langua
 
 model.load_state_dict(torch.load('C:/Users/Soumyadip Nandi/Downloads/policy/language/model.pth'))
 print(model.eval())
-
+## save and evaluate the model now.
