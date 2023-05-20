@@ -187,6 +187,12 @@ The [data](https://github.com/soumyadip1995/BabyGPT/tree/main/data) folder conta
 7. chinchilla paper
 8. karpathy's nn zero to hero.
 9. Lightning AI for Low rank Approximation.
+10. IST das for gptq
+
+### LICENSES
+
+Licenses have been updated to include facebookresearch/llama, lit-llama and IST-das lab
+You can use it under GNU, Apache and MIT.
 
 ### TO DO
 
