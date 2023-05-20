@@ -1,5 +1,5 @@
 # Quantization
-
+/// Most of the code has an apacher license from meta llama.
 We are performing post training quantization. After training has been completed, we quantize the layers in order, instead of quantizing everything at once. Will elaborate more about quantization later on. tokenizer.py generates tokenizer.model. Add it to your model.
 
 ## llama quantization
