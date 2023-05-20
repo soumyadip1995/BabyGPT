@@ -67,6 +67,13 @@ BabyGPT
 ├── transformers
 |   ├── transformer_model.py
 │   ├── babyGPT.py
+├── Quant
+│   ├── quantization.py
+│   ├── bgpt_q.py
+│   ├── tokenizer.model
+│   ├── tokenizer.vocab
+│   ├── model.pth
+│   ├── quant.md
 ├── text.txt
 ├── trainer.ipynb
 
