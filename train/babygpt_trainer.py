@@ -227,6 +227,19 @@ m = model.to(device)
 # create a PyTorch optimizer
 optimizer = torch.optim.AdamW(model.parameters(), lr=learning_rate)
 
+
+# Print model's state_dict
+print("Model's state_dict:")
+for param_tensor in model.state_dict():
+    print(param_tensor, "\t", model.state_dict()[param_tensor].size())
+
+# Print optimizer's state_dict
+print("Optimizer's state_dict:")
+for var_name in optimizer.state_dict():
+    print(var_name, "\t", optimizer.state_dict()[var_name])
+
+
+
 for iter in range(max_iters):
 
     # every once in a while evaluate the loss on train and val sets
@@ -246,3 +259,9 @@ for iter in range(max_iters):
 # generate from the model
 context = torch.zeros((1, 1), dtype=torch.long, device=device)
 print(decode(m.generate(context, max_new_tokens=500)[0].tolist()))
+torch.save(model.state_dict(), 'C:/Users/Soumyadip Nandi/Downloads/policy/language/model.pth')
+
+
+model.load_state_dict(torch.load('C:/Users/Soumyadip Nandi/Downloads/policy/language/model.pth'))
+print(model.eval())
+
