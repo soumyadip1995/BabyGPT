@@ -28,6 +28,15 @@ We need efficient memory usage for LLMs. Hardware accelerators use a technique c
 device to its theoretical peak FLOPs. MFU is the ratio of the observed throughput (tokens-per-second), relative to the theoretical maximum throughput of a system operating at peak FLOPs. The theoretical peak matmul of Tesla T4 is around 8.1 TFLOPS. Hence, we calculate the MFU of the LLaMA trainer model. See in the  [trainer](https://github.com/soumyadip1995/BabyGPT/blob/main/trainer.ipynb) notebook under LLaMA-trainer. We receive a MFU of : 0.0000490951% for around 16k parametres. This would of course increase as the number of parametres increases. For a 530B parametre model, MPU is around 30% on A100 GPUs. We use Section B from the [PaLM](https://arxiv.org/pdf/2204.02311.pdf) paper for reference.
 
 
+### Quantization 
+
+LLMs  require  many GPUs to run, we need to find ways to reduce these requirements while preserving the model's performance. Various technologies have been developed that try to shrink the model size, you may have heard of quantization and distillation. It has been discovered that instead of using the 4-byte FP32 precision, we can get an almost identical inference outcome with 2-byte BF16/FP16 half-precision, which halves the model size.
+
+To remediate that,  8-bit quantization was introduced. This method uses a quarter precision, thus needing only 1/4th of the model size! But it's not done by just dropping another half of the bits. There's a lot more to this topic. Look at hugging face quantization.
+
+You can see [quant.md](https://github.com/soumyadip1995/BabyGPT/blob/main/quant/quant.md) on how to perform llama-quantization
+I added a very preliminary ```bgpt_q.py``` . It's still a little dodgy for now. Different benchmarks need to be done.  
+
 ## Files
 
 ```
@@ -172,7 +181,7 @@ The [data](https://github.com/soumyadip1995/BabyGPT/tree/main/data) folder conta
 
 ### TO DO
 
-1. Building A tokenizer and quantization.
+1. If someone can do the different benchmarks and language generation for bgpt_q.py , that would be awesome. 
 2. Building an attention Engine
 
 
