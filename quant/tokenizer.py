@@ -48,6 +48,6 @@ class Tokenizer:
         model_prefix = os.path.join(destination, "tokenizer")
         SentencePieceTrainer.Train(input=input, model_prefix=model_prefix, vocab_size=vocab_size)
 
-t = Tokenizer.train("ALL_eminem.txt", "C://Users//Soumyadip Nandi//Downloads//policy//language", vocab_size = 10000)
+t = Tokenizer.train("C://Users//Soumyadip Nandi//Downloads//policy//language//data//ALL_eminem.txt", "C://Users//Soumyadip Nandi//Downloads//policy//language", vocab_size = 10000)
 print(t)
 
