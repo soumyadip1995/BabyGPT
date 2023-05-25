@@ -34,7 +34,7 @@ LLMs  require  many GPUs to run, we need to find ways to reduce these requiremen
 
 To remediate that,  8-bit quantization was introduced. This method uses a quarter precision, thus needing only 1/4th of the model size! But it's not done by just dropping another half of the bits. There's a lot more to this topic. Look at hugging face quantization.
 
-You can see [quant.md](https://github.com/soumyadip1995/BabyGPT/blob/main/quant/quant.md) on how to perform llama-quantization. You can look at []() for a beginner's introduction to quantization.  Different benchmarks need to be done. For ex:- On a GPU, the 7B parametre model on bfloat16 will take about 15GB. BabyGPT will take about a few kilobytes..!!!
+You can see [quant.md](https://github.com/soumyadip1995/BabyGPT/blob/main/quant/quant.md) on how to perform llama-quantization. You can look at [quantization Notebook](https://github.com/soumyadip1995/BabyGPT/blob/main/quant/Quantization.ipynb) for a beginner's introduction to quantization.  Different benchmarks need to be done. For ex:- On a GPU, the 7B parametre model on bfloat16 will take about 15GB. BabyGPT will take about a few kilobytes..!!!
 ```quantization.py``` has been obtained from lit-llama.
 
 
