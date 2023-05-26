@@ -103,7 +103,7 @@ class LowRankTransformer(nn.Module):
         return x
 
 
-words = open(r"C:\Users\Soumyadip Nandi\Downloads\policy\input.txt", 'r', encoding='utf-8').read().split()
+words = open(r"\context\ALL_eminem.txt", 'r', encoding='utf-8').read().split()
 
 chars = sorted(list(set(words)))
 vocab_size = len(chars)
