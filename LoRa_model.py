@@ -102,11 +102,4 @@ class LowRankTransformer(nn.Module):
 
         return x
 
-
-words = open(r"\context\ALL_eminem.txt", 'r', encoding='utf-8').read().split()
-
-chars = sorted(list(set(words)))
-vocab_size = len(chars)
-lrt = LowRankTransformer(vocab_size, 4, 16, 4, 8)
-
 ### number of parameters: 15328
