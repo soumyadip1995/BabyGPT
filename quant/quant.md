@@ -2,7 +2,7 @@
 ***Most of the code has an apache license from meta llama.***
 
 
-We are performing post training quantization. After training has been completed, we quantize the layers in order, instead of quantizing everything at once. Will elaborate more about quantization later on. tokenizer.py generates tokenizer.model. Add it to your model.
+We are performing post training quantization. After training has been completed, we quantize the layers in order, instead of quantizing everything at once. Will elaborate more about quantization later on. ```tokenizer.py```  generates tokenizer.model. Add it to your model.
 
 ## llama quantization
 
@@ -27,9 +27,12 @@ checkpoints/llama
 ```
 Convert the weights to the LLaMA format:
 
-Covert the checkpoints.
+Convert the checkpoints.
+ou are all set. Now you can continue with inference or finetuning.
 
-Note: All scripts are prone toargument customization
+Try creating a generate() as we have done in babygpt_trainer.py to test the imported weights.
+
+Note: All scripts are prone to argument customization
 
 ### OpenLLaMA
 OpenLM Research has released Apache 2.0 licensed weights obtained by training LLaMA on the 1.2 trillion token open-source RedPajama dataset.
@@ -40,6 +43,4 @@ Weights were released in preview on intermediate number of tokens (400B at the t
 
 ```git clone https://huggingface.co/openlm-research/open_llama_7b_400bt_preview checkpoints/open-llama/7B```
 
-### TO DO:
 
-The babygpt quantization is still a little bit dodgy. I will come back to it later. Tokenizer works, quantization.py works.
