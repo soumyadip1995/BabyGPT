@@ -37,6 +37,23 @@ To remediate that,  8-bit quantization was introduced. This method uses a quarte
 You can see [quant.md](https://github.com/soumyadip1995/BabyGPT/blob/main/quant/quant.md) on how to perform llama-quantization. You can look at [quantization Notebook](https://github.com/soumyadip1995/BabyGPT/blob/main/quant/Quantization.ipynb) for a beginner's introduction to quantization.  Different benchmarks need to be done. For ex:- On a GPU, the 7B parametre model on bfloat16 will take about 15GB. BabyGPT will take about a few kilobytes..!!!
 ```quantization.py``` has been obtained from lit-llama.
 
+#### Our result
+For post training quantization, we are able to reduce the model size by a factor of almost 4.
+```
+model_fp = BabyGPTmodel(config)
+model_fp.eval()
+model_int8 = torch.ao.quantization.quantize_dynamic(
+    model_fp,  # the original model
+    {torch.nn.Linear},  # a set of layers to dynamically quantize
+    dtype=torch.qint8)  
+    
+/// number of parameters: 3222637
+12.9688 MB
+3.4603 MB ////
+```
+
+***Note: Just for quantization we are using a bigger model with about 3.22M paramtres***
+
 
 ## Files
 
