@@ -212,8 +212,8 @@ You can use it under GNU, Apache and MIT.
 
 ### TO DO
 
-1. If someone can do the different benchmarks and language generation for bgpt_q.py , that would be awesome. 
-2. Building an attention Engine
+1. Try out quantization for Lora 
+2. analysing the different performance benchmarks for the models.
 
 
 
