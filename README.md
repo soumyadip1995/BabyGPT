@@ -57,6 +57,7 @@ model_int8 = torch.ao.quantization.quantize_dynamic(
 ### Performance Benchmark
 
 Performance benchmarking has been done on the BabyGPTmodel and the quantized model. Below are the results.
+
 ![alt_text](https://github.com/soumyadip1995/BabyGPT/blob/main/image/performance.png). 
 
 It has been added to the [quantization Notebook](https://github.com/soumyadip1995/BabyGPT/blob/main/quant/Quantization.ipynb) in the quant folder.
