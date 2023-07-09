@@ -25,7 +25,7 @@ An implemetation of the [lit-llama](https://github.com/Lightning-AI/lit-llama) m
 ### LLaMA with Model FLOP Utilization(MFU) :zap:
 
 We need efficient memory usage for LLMs. Hardware accelerators use a technique called Hardware FLOP Utilization for efficient trade-offs between memory usage and compute. This is typically done using an estimate of the ratio of FLOPs observed on a given
-device to its theoretical peak FLOPs. MFU is the ratio of the observed throughput (tokens-per-second), relative to the theoretical maximum throughput of a system operating at peak FLOPs. The theoretical peak matmul of Tesla T4 is around 8.1 TFLOPS. Hence, we calculate the MFU of the LLaMA trainer model. See in the  [trainer](https://github.com/soumyadip1995/BabyGPT/blob/main/trainer.ipynb) notebook under LLaMA-trainer. We receive a MFU of : 0.0000490951% for around 16k parametres. This would of course increase as the number of parametres increases. For a 530B parametre model, MPU is around 30% on A100 GPUs. We use Section B from the [PaLM](https://arxiv.org/pdf/2204.02311.pdf) paper for reference.
+device to its theoretical peak FLOPs. MFU is the ratio of the observed throughput (tokens-per-second), relative to the theoretical maximum throughput of a system operating at peak FLOPs. The theoretical peak matmul of Tesla T4 is around 8.1 TFLOPS. Hence, we calculate the MFU of the LLaMA trainer model. See in the  [trainer](https://github.com/soumyadip1995/BabyGPT/blob/main/trainer.ipynb) notebook under LLaMA-trainer. We receive a MFU of :  0.0527723427% on 3.22M parametres. This would of course increase as the number of parametres increases. For a 530B parametre model, MPU is around 30% on A100 GPUs. We use Section B from the [PaLM](https://arxiv.org/pdf/2204.02311.pdf) paper for reference.
 
 
 ### Quantization 
@@ -146,32 +146,42 @@ You can see the result from both the models in the [trainer](https://github.com/
 
 #### Result from the llama trainer.
 
-```
-``` number of parameters: 16221 ```
-step 0: train loss 4.6937, val loss 4.6937
-step 500: train loss 3.1929, val loss 3.1976
-step 1000: train loss 2.7869, val loss 2.7994
-.
-.
-.
-step 10999: train loss 2.2015, val loss 2.2009
+Number of params = 3.22 M
 
-Oh a he spoments
-Ohs and whet me.0
-Jay, Dre hanf inche, buh, I'm herere a win'
-So to saiidid
-I I'mf neved, I donse efy fake'ind merile (I'd nobqu cad-shegeds..]
-Get withank to I what baut the gudin' I'm no]
-Now oun the cuckedid in
-I gine we dey (Be be doup I cloe that in a treve I ack pith my!
-I gine we dey (Be be doup I cloe that in a treve I ack pith my!
-?
-Thhide was ueves sueel The ray heB*Red, yeu the me won beall you cham?
-This if to my ona um a lating ut Dof'
-Just to to sarse mighior mey (namale me
-Heats to ine Ack moy t'
-She good whene core pruting yo
 ```
+``` number of parameters: 3222381 ```
+
+step 0: train loss 4.6894, val loss 4.6895
+step 500: train loss 2.1731, val loss 2.1832
+step 1000: train loss 1.7580, val loss 1.8032
+step 1500: train loss 1.5790, val loss 1.6645
+step 2000: train loss 1.4482, val loss 1.5992
+step 2500: train loss 1.3538, val loss 1.5874
+step 3000: train loss 1.2574, val loss 1.5971
+.
+.
+.
+step 9000: train loss 0.5236, val loss 2.4614
+step 9500: train loss 0.4916, val loss 2.5494
+step 10000: train loss 0.4680, val loss 2.6631
+step 10500: train loss 0.4448, val loss 2.6970
+step 10999: train loss 0.4341, val loss 2.7462
+
+Detroit, revior myself 'til I confused to get the big clead Mastles
+Slaughterhouse on the blue, that's when he pine I'm hop with the cowprinton
+robaly I want to a lox on my tempt
+
+But now we can't never find a gift killed broke
+Big before anyone could ever hear the first as I was cooped chill
+But i this o for a big star
+I said get chased up!
+(Hello darkness, my old friend)[Eminem:]
+If my legacy I acged buving in the tub (might what?)
+I would know one [*Barrns, worried :]
+Yeah, so kon bitch, it's
+```
+
+
 
 Seems like the model converges a bit early, towards the end. Maybe that will need more modification. 
 Spitting some Eminem yo..:smile:
