@@ -24,7 +24,7 @@ Quantization has also been performed on the lora model. A calculation of FLOPs h
 
 ## We support Lit llama for BabyGPT :zap: :zap:
 
-An implemetation of the [lit-llama](https://github.com/Lightning-AI/lit-llama) model has been added to BabyGPT. It still needs a bit more modification. You can find the notebook here -> [llama_implementation](https://github.com/soumyadip1995/BabyGPT/blob/main/Notebook/llama_implementation.ipynb) . Run the model 
+An implemetation of the [lit-llama](https://github.com/Lightning-AI/lit-llama) model has been added to BabyGPT(based on llama-1). It still needs a bit more modification. You can find the notebook here -> [llama_implementation](https://github.com/soumyadip1995/BabyGPT/blob/main/Notebook/llama_implementation.ipynb) . Run the model 
 ```python llama_model.py```. Training and generating tokens has been provided below.
 
 ### LLaMA with Model FLOP Utilization(MFU) :zap:
