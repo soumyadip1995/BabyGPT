@@ -14,7 +14,12 @@ We implement a Low rank approximation as well as lit-lama  to  babyGPT as well. 
 
 ## Low rank approximation
 
-Low rank approximation improves parametre efficiency(compression technique). A LoRa_model.py has been added(15k parametres) less than BabyGPT..!!. All, we need to do is to compute a rank parametre and compute the attention accordingly. In the [LoRa notebook](https://github.com/soumyadip1995/BabyGPT/blob/main/Notebook/lora.ipynb), an estimation of FLOPs has been done according to the [chinchilla paper](https://arxiv.org/pdf/2203.15556.pdf).
+Low rank approximation improves parametre efficiency(compression technique). A LoRa_model.py has been added(on 256 out channels) . We receive a parametre reduction of about 2. All, we need to do is to compute a rank parametre and compute the attention accordingly. In the [LoRa notebook](https://github.com/soumyadip1995/BabyGPT/blob/main/Notebook/lora.ipynb), an estimation of FLOPs has been done according to the [chinchilla paper](https://arxiv.org/pdf/2203.15556.pdf).
+
+
+### Quantization on low rank approximation
+
+Quantization has also been performed on the lora model. A calculation of FLOPs has been added as well. For the BabyGPT model for 256 out channels we get 0.407 Peta FLOPs.  In the [LoRa notebook](https://github.com/soumyadip1995/BabyGPT/blob/main/Notebook/lora.ipynb) we have added the quantization. In terms of size reduction, we are getting a reduction of a factor of 1.3 for now.
 
 
 ## We support Lit llama for BabyGPT :zap: :zap:
@@ -198,10 +203,10 @@ The [data](https://github.com/soumyadip1995/BabyGPT/tree/main/data) folder conta
 | Multi headed attention      | [colab](https://colab.research.google.com/github/soumyadip1995/language-models/blob/main/Notebook/Multi_head_attention.ipynb)|
 | GPT from scratch            | [colab](https://colab.research.google.com/github/soumyadip1995/language-models/blob/main/Notebook/GPT_from_scratch.ipynb) (Approx 860k parametres)|
 | Spatial Transformers        | [colab](https://github.com/soumyadip1995/language-models/blob/main/Notebook/Spatialtransformer.ipynb)|
-| BabyGPT                     | [colab](https://github.com/soumyadip1995/language-models/blob/main/Notebook/BabyGPT.ipynb)(Approx 28k parametres)|
-| LoRa                    | [colab](https://github.com/soumyadip1995/BabyGPT/blob/main/Notebook/lora.ipynb)(Approx 15k parametres). less than babygpt|
-| lit-llama for BabyGPT                   | [colab](https://github.com/soumyadip1995/BabyGPT/blob/main/Notebook/llama_implementation.ipynb)(Approx 28k parametres)|
-| trainer for Babygpt and llama                   | [colab](https://github.com/soumyadip1995/BabyGPT/blob/main/trainer.ipynb)(Approx 16k parametres)|
+| BabyGPT                     | [colab](https://github.com/soumyadip1995/language-models/blob/main/Notebook/BabyGPT.ipynb)(16, 256 out channels)|
+| LoRa                    | [colab](https://github.com/soumyadip1995/BabyGPT/blob/main/Notebook/lora.ipynb)(256 out channels)|
+| lit-llama for BabyGPT                   | [colab](https://github.com/soumyadip1995/BabyGPT/blob/main/Notebook/llama_implementation.ipynb)(16 out channels for lit-llama )|
+| trainer for Babygpt and llama                   | [colab](https://github.com/soumyadip1995/BabyGPT/blob/main/trainer.ipynb)(16 out channels for BabyGPT , 256 out channels for llama)|
 
 
 ```text.txt ``` is based on Eminem's Stan. 
