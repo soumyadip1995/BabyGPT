@@ -5,7 +5,7 @@ from torch.nn import functional as F
 from math import sqrt
 
 
-words = open(r"C:\Users\Soumyadip Nandi\Downloads\policy\input.txt", 'r', encoding='utf-8').read().split()
+words = open(r"C:\Users\Soumyadip Nandi\Downloads\policy\ALL_eminem.txt", 'r', encoding='utf-8').read().split()
 
 chars = sorted(list(set(words)))
 string2integer = {ch: i for i, ch in enumerate(chars)}
