@@ -17,7 +17,8 @@ class LLaMAConfig:
     vocab_size: int = 32000
     n_layer: int = 32
     n_head: int = 32
-    n_embd: int = 4096
+    dim: int = 4096
+    dim: int = 4096
 
 
     @classmethod
@@ -26,10 +27,10 @@ class LLaMAConfig:
 
 
 llama_configs = {
-    "7B": dict(n_layer=32, n_head = 32, n_embd=4096),
-    "13B": dict(n_layer=40, n_head =40, n_embd=5120),
-    "30B": dict(n_layer=60, n_head=52, n_embd=6656),
-    "65B": dict(n_layer=80, n_head =64, n_embd=8192),
+    "7B": dict(n_layer=32, n_head = 32, dim=4096),
+    "13B": dict(n_layer=40, n_head =40, dim=5120),
+    "30B": dict(n_layer=60, n_head=52, dim=6656),
+    "65B": dict(n_layer=80, n_head =64, dim=8192),
 }
 
 
@@ -43,7 +44,8 @@ eval_interval = 500
 eval_iters = 200
 dropout = 0.2
 
-words = open(r"C:\Users\Soumyadip Nandi\Downloads\policy\language\data\ALL_eminem.txt", 'r', encoding='utf-8').read()
+
+words = open(r"C:\Users\Soumyadip Nandi\Downloads\policy\BabyGPT\data\ALL_eminem.txt", 'r', encoding='utf-8').read()
 
 
 chars = sorted(list(set(words)))
@@ -94,17 +96,17 @@ class Attention(nn.Module):
     super(Attention, self).__init__()
 
     self.config = config
-    self.atten = nn.Linear(config.n_embd, 3 * config.n_embd)
-    self.projection = nn.Linear(config.n_embd, config.n_embd)
+    self.atten = nn.Linear(config.dim, 3 * config.dim)
+    self.projection = nn.Linear(config.dim, config.dim)
     self.n_head = config.n_head
-    self.n_embd = config.n_embd
+    self.dim = config.dim
     self.block_size = config.block_size
     self.rope_cache: Optional[torch.Tensor] = None
     self.register_buffer('tril', torch.tril(torch.ones(config.block_size, config.block_size)))
 
   def forward(self, x):
     B,T,C = x.size()
-    q, k ,v  = self.atten(x).split(self.n_embd, dim=2)
+    q, k ,v  = self.atten(x).split(self.dim, dim=2)
     q = q.view(B, T, self.n_head, C // self.n_head).transpose(1, 2)
     k = k.view(B, T, self.n_head, C // self.n_head).transpose(1, 2)
     v = v.view(B, T, self.n_head, C // self.n_head).transpose(1, 2)
@@ -114,7 +116,7 @@ class Attention(nn.Module):
       # cache for future forward calls
       self.rope_cache = build_rope_cache(
       seq_len=self.block_size,
-      n_elem=self.n_embd // self.n_head, 
+      n_elem=self.dim // self.n_head, 
       dtype=x.dtype,
       device=x.device,
             )
@@ -124,16 +126,16 @@ class Attention(nn.Module):
 
 
 
-    #manual implementation of attention
-    #from karpathy
-    # att = (q @ k.transpose(-2, -1)) * (1.0 / math.sqrt(k.size(-1)))
-    # att = att.masked_fill(self.tril[:T, :T] == 0, float('-inf'))
-    # att = F.softmax(att, dim=-1)
-    # y = att @ v # (B, nh, T, T) x (B, nh, T, hs) -> (B, nh, T, hs)
-    # y = y.transpose(1, 2).contiguous().view(B, T, C) # re-assemble all head outputs side by side
+    # manual implementation of attention
+    # from karpathy
+    att = (q @ k.transpose(-2, -1)) * (1.0 / math.sqrt(k.size(-1)))
+    att = att.masked_fill(self.tril[:T, :T] == 0, float('-inf'))
+    att = F.softmax(att, dim=-1)
+    y = att @ v # (B, nh, T, T) x (B, nh, T, hs) -> (B, nh, T, hs)
+    y = y.transpose(1, 2).contiguous().view(B, T, C) # re-assemble all head outputs side by side
 
     # efficient attention using Flash Attention CUDA kernels
-    y = F.scaled_dot_product_attention(q, k, v, attn_mask=None, dropout_p=0.0, is_causal=True)
+    # y = F.scaled_dot_product_attention(q, k, v, attn_mask=None, dropout_p=0.0, is_causal=True)
 
     y = y.transpose(1, 2).contiguous().view(B, T, C)  # re-assemble all head outputs side by side
 
@@ -145,13 +147,13 @@ class Attention(nn.Module):
 class FeedForward(nn.Module):
   def __init__(self, config: LLaMAConfig) -> None:
     super().__init__()
-    hidden_dim = 4 * config.n_embd
+    hidden_dim = 4 * config.dim
     n_hidden = int(2 * hidden_dim / 3)
 
 
-    self.c_fc1 = nn.Linear(config.n_embd, n_hidden, bias=False)
-    self.c_fc2 = nn.Linear(config.n_embd, n_hidden, bias=False)
-    self.c_proj = nn.Linear(n_hidden,  config.n_embd, bias=False)
+    self.c_fc1 = nn.Linear(config.dim, n_hidden, bias=False)
+    self.c_fc2 = nn.Linear(config.dim, n_hidden, bias=False)
+    self.c_proj = nn.Linear(n_hidden,  config.dim, bias=False)
     
   def forward(self, x: torch.Tensor) -> torch.Tensor:
     x = F.silu(self.c_fc1(x)) * self.c_fc2(x)
@@ -165,8 +167,8 @@ class Transformer(nn.Module):
     super(Transformer, self).__init__()
     self.attention = Attention(config)
     self.feed_forward = FeedForward(config)
-    self.layer_norm_1 = RMSNorm(config.n_embd)
-    self.layer_norm_2 = RMSNorm(config.n_embd)
+    self.layer_norm_1 = RMSNorm(config.dim)
+    self.layer_norm_2 = RMSNorm(config.dim)
 
   def forward(self, x):
     
@@ -249,11 +251,11 @@ class BabyGPTmodel(nn.Module):
         assert config.block_size is not None
 
         self.config = config
-        self.token = nn.Embedding(config.vocab_size, config.n_embd)
-        self.positional_embeddings = nn.Embedding(config.block_size, config.n_embd)
+        self.token = nn.Embedding(config.vocab_size, config.dim)
+        self.positional_embeddings = nn.Embedding(config.block_size, config.dim)
         self.blocks = nn.Sequential(*[Transformer(config) for _ in range(config.n_layer)])
-        self.ln_f = RMSNorm(config.n_embd, eps = 1e-12) # final layer norm
-        self.lnum_heads = nn.Linear(config.n_embd, config.vocab_size)
+        self.ln_f = RMSNorm(config.dim, eps = 1e-12) # final layer norm
+        self.lnum_heads = nn.Linear(config.dim, config.vocab_size)
 
         ## init all weights
         ## from karpathy
@@ -320,7 +322,7 @@ config = LLaMAConfig(
     vocab_size = len(chars),
     n_head = 4,
     n_layer = 4,
-    n_embd = 16)
+    dim = 16)
 
 model = BabyGPTmodel(config)
 
