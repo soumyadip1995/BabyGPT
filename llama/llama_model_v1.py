@@ -80,15 +80,15 @@ class AttentionHead(nn.Module):
 
 
 class RMSNorm(nn.Module):
-  def __init__(self, size: int, dim: int = -1, eps: float = 1e-5) -> None:
+  def __init__(self, size: int, embedded_dim: int = -1, eps: float = 1e-5) -> None:
     super().__init__()
     self.scale = nn.Parameter(torch.ones(size))
     self.eps = eps
-    self.dim = dim
+    self.embedded_dim = embedded_dim
 
   def forward(self, x: torch.Tensor) -> torch.Tensor:
 
-    norm_x = torch.mean(x * x, dim=self.dim, keepdim=True)
+    norm_x = torch.mean(x * x, embedded_dim=self.embedded_dim, keepdim=True)
     x_normed = x * torch.rsqrt(norm_x + self.eps)
     return self.scale * x_normed
 
@@ -210,9 +210,9 @@ class BabyGPTmodel(nn.Module):
     def from_name(cls, name: str) -> Self:
         return cls(LLaMAConfig.from_name(name))
 
-config =  LLaMAConfig(block_size = 3,
-    vocab_size = 478, num_layers  = 4,
+config =  LLaMAConfig(block_size = 64,
+    vocab_size = 22127, num_layers  = 4,
     num_heads = 4,
-    embedded_dim = 16)
+    embedded_dim = 256)
 
 llama = BabyGPTmodel(config)
