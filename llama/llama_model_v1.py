@@ -9,6 +9,10 @@ import torch.nn as nn
 from torch.nn import functional as F
 from typing_extensions import Self
 
+
+
+words = open(r"C:\Users\Soumyadip Nandi\Downloads\policy\BabyGPT\data\ALL_eminem.txt", 'r', encoding='utf-8').read()
+
 @dataclass
 class LLaMAConfig:
     block_size: int = 2048
