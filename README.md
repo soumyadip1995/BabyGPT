@@ -29,7 +29,7 @@ Quantization has also been performed on the lora model. A calculation of FLOPs h
 ## We support Lit llama for BabyGPT :zap: :zap:
 
 An implemetation of the [lit-llama](https://github.com/Lightning-AI/lit-llama) model has been ported to BabyGPT(based on llama- version 1). You can find the notebook here -> [llama_implementation](https://github.com/soumyadip1995/BabyGPT/blob/main/Notebook/llama_implementation.ipynb) . Run the model 
-```python llama_model.py```. Training and generating tokens has been provided below. 
+```llama\python llama_model_v1.py```. Training and generating tokens has been provided below. 
 
 Note:- We have ported ```build_rope_cache()``` , ```apply_rope()``` and ```RMSNorm()```  from version 1. We are also not using the  version 1 weights or checkpoints(these are for even larger models 7B, 13B, 65B etc). You can download the weights and port llama to your own version.
 
@@ -135,7 +135,7 @@ To run a low rank approximation model
 ```python LoRa_model.py```
 
 To run the llama model
-```python llama_model.py```
+```llama\python llama_model_v1.py```
 
 Run the different attention mechanisms from [Attention](https://github.com/soumyadip1995/BabyGPT/tree/main/Attention) folder.
 
