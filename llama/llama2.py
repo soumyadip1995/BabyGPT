@@ -1,8 +1,6 @@
 ### from https://github.com/Lightning-AI/lit-llama partially.
 ### from https://github.com/facebookresearch/llama/blob/main/llama/model.py partiallly
 
-
-
 import math
 from dataclasses import dataclass
 from typing import Optional
@@ -14,6 +12,12 @@ import torch
 import torch.nn as nn
 from torch.nn import functional as F
 from typing_extensions import Self
+
+
+words = open(r"C:\Users\Soumyadip Nandi\Downloads\policy\BabyGPT\data\ALL_eminem.txt", 'r', encoding='utf-8').read().split()
+
+chars = sorted(list(set(words)))
+
 
 @dataclass
 class LLaMAConfig:
@@ -28,6 +32,7 @@ class LLaMAConfig:
     max_seq_length: int = 2048
     max_batch_size = 32
     dropout : float = 0.1
+    batch_size :int = 16
 
 
 
@@ -47,6 +52,7 @@ llama_configs = {
 }
 
 #### arbitrary value for the 70B
+
 
 
 class RMSNorm(torch.nn.Module):
@@ -197,7 +203,7 @@ class Transformer(nn.Module):
     self.feed_forward_network = RMSNorm(config.embedded_dim, eps = config.norm_eps)
 
 
-  def forward(self, x: torch.Tensor) -> torch.Tensor:
+  def forward(self, x: torch.Tensor, freqs_cis) -> torch.Tensor:
     h = x + self.attention.forward(self.attention_norm(x), freqs_cis)
     out = h + self.feedforward.forward(self.feed_forward_network(x))
     return out
@@ -209,7 +215,7 @@ class BabyGPTmodel(nn.Module):
     super(BabyGPTmodel, self).__init__()
     assert config.vocab_size is not None
     assert config.max_seq_length is not None
-    
+
     self.config = config
     self.token = nn.Embedding(config.vocab_size, config.embedded_dim)
     self.positional_embeddings = nn.Embedding(config.max_seq_length, config.embedded_dim)
@@ -246,15 +252,16 @@ class BabyGPTmodel(nn.Module):
       elif isinstance(module, nn.Embedding):
         torch.nn.init.normal_(module.weight, mean=0.0, std=0.02 / math.sqrt(2 * config.num_layers))
 
-  def forward(self, idx, target = None):
-    idx = idx.device
-    _bsz, seq_len = idx.shape
+  def forward(self, idx):
+    device = idx.device
+    _bsz, seq_len = idx.size()
     tok_emb = self.token(idx)
-    position_ids = torch.arange(0, t, dtype = torch.long).unsqueeze(0)
+    position_ids = torch.arange(0, seq_len, dtype = torch.long).unsqueeze(0)
     pos_emb = self.positional_embeddings(position_ids)
+    x = tok_emb + pos_emb
     freqs_cis = self.freqs_cis[:seq_len]
     for block in self.blocks:
-      x = self.blocks(x)
+      x = self.blocks(x, freqs_cis)
     x = self.ln_f(x)
     logits = self.lnum_heads(x)
 
@@ -265,9 +272,12 @@ class BabyGPTmodel(nn.Module):
       return cls(LLaMAConfig.from_name(name))
 
 
+
 config =  LLaMAConfig(max_seq_length = 64,
-    vocab_size = 22127, num_layers  = 4,
+    vocab_size = len(chars), num_layers  = 4,
     num_heads = 4,
     embedded_dim = 256)
 
-llama = BabyGPTmodel(config)
+llama2 = BabyGPTmodel(config)
+
+
