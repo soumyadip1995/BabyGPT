@@ -136,7 +136,7 @@ class AttentionHead(nn.Module):
                                     .view(1, 1, config.max_seq_length, config.max_seq_length))
 
   def forward(self, x:torch.Tensor, freqs_cis = torch.Tensor):
-    bsz, seq_len, _ = x.shape
+    bsz, seqlen, _ = x.shape
 
 
     xq, xk ,xv  = self.atten(x).split(self.embedded_dim, dim=2)
@@ -162,7 +162,7 @@ class AttentionHead(nn.Module):
     att = att.masked_fill(self.tril[:T, :T] == 0, float('-inf'))
     att = F.softmax(att, dim=-1)
     y = att @ xv # (B, nh, T, T) x (B, nh, T, hs) -> (B, nh, T, hs)
-    y = y.transpose(1, 2).contiguous().view(bsz, seq_len, _) # re-assemble all head outputs side by side
+    y = y.transpose(1, 2).contiguous().view(bsz, seqlen, _) # re-assemble all head outputs side by side
 
     # output projection
     y = self.c_proj(y)
@@ -210,6 +210,7 @@ class Transformer(nn.Module):
 
 
 
+
 class BabyGPTmodel(nn.Module):
   def __init__(self, config : LLaMAConfig):
     super(BabyGPTmodel, self).__init__()
@@ -254,12 +255,12 @@ class BabyGPTmodel(nn.Module):
 
   def forward(self, idx):
     device = idx.device
-    _bsz, seq_len = idx.size()
+    _bsz, seqlen = idx.size()
     tok_emb = self.token(idx)
-    position_ids = torch.arange(0, seq_len, dtype = torch.long).unsqueeze(0)
+    position_ids = torch.arange(0, seqlen, dtype = torch.long).unsqueeze(0)
     pos_emb = self.positional_embeddings(position_ids)
     x = tok_emb + pos_emb
-    freqs_cis = self.freqs_cis[:seq_len]
+    freqs_cis = self.freqs_cis[:seqlen]
     for block in self.blocks:
       x = self.blocks(x, freqs_cis)
     x = self.ln_f(x)
@@ -279,5 +280,4 @@ config =  LLaMAConfig(max_seq_length = 64,
     embedded_dim = 256)
 
 llama2 = BabyGPTmodel(config)
-
 
