@@ -26,12 +26,23 @@ Low rank approximation improves parametre efficiency(compression technique). A L
 Quantization has also been performed on the lora model. A calculation of FLOPs has been added as well. For the BabyGPT model for 256 out channels we get 0.407 Peta FLOPs.  In the [LoRa notebook](https://github.com/soumyadip1995/BabyGPT/blob/main/Notebook/lora.ipynb) we have added the quantization. In terms of size reduction, we are getting a reduction of a factor of 1.3 for now.
 
 
-## We support Lit llama for BabyGPT :zap: :zap:
+## We support LLaMa for BabyGPT :zap: :zap:
+
+
+### 1. LLaMa version -1
 
 An implemetation of the [lit-llama](https://github.com/Lightning-AI/lit-llama) model has been ported to BabyGPT(based on llama- version 1). You can find the notebook here -> [llama_implementation](https://github.com/soumyadip1995/BabyGPT/blob/main/Notebook/llama_implementation.ipynb) . Run the model 
 ```llama\python llama_model_v1.py```. Training and generating tokens has been provided below. 
 
 Note:- We have ported ```build_rope_cache()``` , ```apply_rope()``` and ```RMSNorm()```  from version 1. We are also not using the  version 1 weights or checkpoints(these are for even larger models 7B, 13B, 65B etc). You can download the weights and port llama to your own version.
+
+### 1. LLaMa2
+
+We have ported [llama2](https://github.com/facebookresearch/llama/blob/main/llama/model.py) by meta into BabyGPT. You can find the implementation at ```llama\python llama2.py```. we have also provided a calculation of FLOPs along with the model.
+
+The FLOPs to compute k, v cache is the flops to compute is :- 2 * 2 * num_layers * (embedded_dim) ^2. Find more information on how to compute memory and compute in [kipply's blog](https://kipp.ly/transformer-inference-arithmetic/#kv-cache)
+
+Note:- We are not using original llama weights by meta. We are also using arbitrary values for 70B. You can port it to your own model using your own weights.
 
 ### LLaMA with Model FLOP Utilization(MFU) :zap:
 
@@ -39,16 +50,16 @@ We need efficient memory usage for LLMs. Hardware accelerators use a technique c
 device to its theoretical peak FLOPs. MFU is the ratio of the observed throughput (tokens-per-second), relative to the theoretical maximum throughput of a system operating at peak FLOPs. The theoretical peak matmul of Tesla T4 is around 8.1 TFLOPS. Hence, we calculate the MFU of the LLaMA trainer model. See in the  [trainer](https://github.com/soumyadip1995/BabyGPT/blob/main/trainer.ipynb) notebook under LLaMA-trainer. We receive a MFU of :  0.0527723427% on 3.22M parametres. This would of course increase as the number of parametres increases. For a 530B parametre model, MPU is around 30% on A100 GPUs. We use Section B from the [PaLM](https://arxiv.org/pdf/2204.02311.pdf) paper for reference.
 
 
-### Quantization 
+## Quantization 
 
 LLMs  require  many GPUs to run, we need to find ways to reduce these requirements while preserving the model's performance. Various technologies have been developed that try to shrink the model size, you may have heard of quantization and distillation. It has been discovered that instead of using the 4-byte FP32 precision, we can get an almost identical inference outcome with 2-byte BF16/FP16 half-precision, which halves the model size.
 
 To remediate that,  8-bit quantization was introduced. This method uses a quarter precision, thus needing only 1/4th of the model size! But it's not done by just dropping another half of the bits. There's a lot more to this topic. Look at hugging face quantization.
 
 You can see [quant.md](https://github.com/soumyadip1995/BabyGPT/blob/main/quant/quant.md) on how to perform llama-quantization. You can look at [quantization Notebook](https://github.com/soumyadip1995/BabyGPT/blob/main/quant/Quantization.ipynb) for a beginner's introduction to quantization. Different benchmarkings has been done.  For ex:- On a GPU, the 7B parametre model on bfloat16 will take about 15GB. BabyGPT will take about a few kilobytes..!!!
-```quantization.py``` has been obtained from lit-llama.
+```quantization.py``` has been obtained from lit-llama repo.
 
-#### Our result
+### Our result
 For post training quantization, we are able to reduce the model size by a factor of almost 4.
 ```
 model_fp = BabyGPTmodel(config)
@@ -65,7 +76,7 @@ model_int8 = torch.ao.quantization.quantize_dynamic(
 
 ***Note: Just for quantization we are using a bigger model with about 3.22M paramtres***
 
-### Performance Benchmark
+## Performance Benchmark
 
 Performance benchmarking has been done on the BabyGPTmodel and the quantized model. Below are the results.
 
@@ -108,6 +119,9 @@ BabyGPT
 │   ├── tokenizer.vocab
 │   ├── model.pth
 │   ├── quant.md
+├── llama
+│   ├── llama2.py
+│   ├── llama_model_v1.py
 ├── text.txt
 ├── trainer.ipynb
 
@@ -139,10 +153,9 @@ To run the llama model
 
 Run the different attention mechanisms from [Attention](https://github.com/soumyadip1995/BabyGPT/tree/main/Attention) folder.
 
-#### Auto Mixed Precision
+### Auto Mixed Precision
 
 A very preliminary auto mixed precision has been added. It can be achieved with a cuda enabled gpu. A combination of pytorch's autocast and gradscaler is used for mixed precision. See more in the pytorch tutorial. Unfortunately the gpu blew up during training and cpu for now only supports bfloat16. Takes a hell of a long time to train. If anyone can improve upon it that would be awesome. Check the [Mixed Precision](https://github.com/soumyadip1995/BabyGPT/blob/main/Notebook/mixed_precision.ipynb) Notebook.
-
 
 
 ### Train and Generate :running:
