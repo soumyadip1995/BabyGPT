@@ -1,12 +1,11 @@
 ### from https://github.com/Lightning-AI/lit-llama partially.
 ### from https://github.com/facebookresearch/llama/blob/main/llama/model.py partiallly
+## we are avoiding flash attention for now.
 
 import math
 from dataclasses import dataclass
 from typing import Optional
 from typing import List, Optional, Tuple, Any
-
-
 
 import torch
 import torch.nn as nn
@@ -14,9 +13,29 @@ from torch.nn import functional as F
 from typing_extensions import Self
 
 
-words = open(r"C:\Users\Soumyadip Nandi\Downloads\policy\BabyGPT\data\ALL_eminem.txt", 'r', encoding='utf-8').read().split()
+words = open(r"C:\Users\Soumyadip Nandi\Downloads\policy\BabyGPT\data\ALL_eminem.txt", 'r', encoding='utf-8').read()
+
+
+block_size = 64
+batch_size = 32
+
 
 chars = sorted(list(set(words)))
+
+vocab_size = len(chars)
+string2integer = {ch: i for i, ch in enumerate(chars)}
+
+
+integer2string = {i:ch for ch,i in string2integer.items()}
+encode = lambda s: [string2integer[c] for c in s]
+
+decode = lambda l: ''.join([integer2string[i] for i in l])
+data = torch.tensor(encode(words), dtype = torch.long)
+
+# ix = torch.randint(len(data) - block_size, (batch_size,))
+# x = torch.stack([data[i:i+block_size] for i in ix])
+# y = torch.stack([data[i+block_size] for i in ix])
+# generate a small batch of data of inputs x and targets y
 
 
 @dataclass
@@ -67,7 +86,6 @@ class RMSNorm(torch.nn.Module):
     def forward(self, x):
         output = self._norm(x.float()).type_as(x)
         return output * self.weight
-
 
 
 
@@ -160,9 +178,9 @@ class AttentionHead(nn.Module):
     # from karpathy
     att = (xq @ xk.transpose(-2, -1)) * (1.0 / math.sqrt(xk.size(-1)))
     att = att.masked_fill(self.tril[:T, :T] == 0, float('-inf'))
-    att = F.softmax(att, dim=-1)
-    y = att @ xv # (B, nh, T, T) x (B, nh, T, hs) -> (B, nh, T, hs)
-    y = y.transpose(1, 2).contiguous().view(bsz, seqlen, _) # re-assemble all head outputs side by side
+    att = F.softmax(att, dim=-1).type_as(xq)
+    y = torch.matmul(att, xv) # (B, nh, T, T) x (B, nh, T, hs) -> (B, nh, T, hs)
+    y = y.transpose(1, 2).contiguous().view(bsz, seqlen, -1) # re-assemble all head outputs side by side
 
     # output projection
     y = self.c_proj(y)
@@ -209,6 +227,41 @@ class Transformer(nn.Module):
     return out
 
 
+seq_len = data.size()
+
+
+def  count_flops(seq_len, config: LLaMAConfig,  ffw_size):
+
+    key_size = config.embedded_dim // config.num_heads
+    embeddings = 2 * seq_len * config.vocab_size * config.embedded_dim
+    # attention
+
+    attention = 2 * 3 * seq_len * config.embedded_dim * (key_size * config.num_heads)
+    # key @ query logits
+    attlogits = 2 * seq_len * seq_len * (key_size * config.num_heads)
+    # softmax
+    attsoftmax = 3 * config.num_heads * seq_len * seq_len # 3* is for subtract (max), exp, divide (?)
+    # softmax @ value reductions
+    attvalue = 2 * seq_len * seq_len * (key_size * config.num_heads)
+    # final linear
+    attlinear = 2 * seq_len * (key_size * config.num_heads) * config.embedded_dim
+    att = attention + attlogits + attsoftmax + attvalue + attlinear
+    # feed forward
+    dense = 2 * seq_len * (config.embedded_dim * ffw_size + config.embedded_dim * ffw_size)
+
+    # logits
+    logits = 2 * seq_len * config.embedded_dim * config.vocab_size
+
+    # this is what you'd expect:
+    # forward_flops = embeddings + num_layers * (att + dense) + logits
+    # but:
+    # per author correspondence apparently there is typo in the paper,
+    # they do not count embeddings and logits to repro table 4. So instead:
+    forward_flops = config.num_layers * (att + dense)
+    backward_flops = 2 * forward_flops # as in Kaplan et al. 2020
+    total_flops = forward_flops + backward_flops
+
+    return total_flops
 
 
 class BabyGPTmodel(nn.Module):
@@ -219,9 +272,11 @@ class BabyGPTmodel(nn.Module):
 
     self.config = config
     self.token = nn.Embedding(config.vocab_size, config.embedded_dim)
+    self.dropout = nn.Dropout(config.dropout)
     self.positional_embeddings = nn.Embedding(config.max_seq_length, config.embedded_dim)
+    self.blocks = nn.Sequential() ### use sequential , module list isn't a subclass
     for layer_id in range(config.num_layers):
-      self.blocks = nn.Sequential(*[Transformer(layer_id, config) for _ in range(config.num_layers)])
+      self.blocks.append(*[Transformer(layer_id, config)])
     self.ln_f = RMSNorm(config.embedded_dim, eps = 1e-12) # final layer norm
     self.lnum_heads = nn.Linear(config.embedded_dim, config.vocab_size)
 
@@ -232,7 +287,7 @@ class BabyGPTmodel(nn.Module):
     self.token.weight = self.lnum_heads.weight # https://paperswithcode.com/method/weight-tying
 
     # some useful precompute for the RoPE relative positional embeddings. TODO why * 2 here? confuse
-    freqs_cis = precompute_freqs_cis(self.config.embedded_dim // self.config.num_heads, self.config.max_seq_length * 2)
+    freqs_cis = precompute_freqs_cis(config.embedded_dim // config.num_heads, config.max_seq_length * 2)
     self.register_buffer("freqs_cis", freqs_cis, persistent=False)
 
     ## init all weights
@@ -259,12 +314,13 @@ class BabyGPTmodel(nn.Module):
     tok_emb = self.token(idx)
     position_ids = torch.arange(0, seqlen, dtype = torch.long).unsqueeze(0)
     pos_emb = self.positional_embeddings(position_ids)
-    x = tok_emb + pos_emb
+    h = tok_emb + pos_emb
+    h = self.dropout(h)
     freqs_cis = self.freqs_cis[:seqlen]
     for block in self.blocks:
-      x = self.blocks(x, freqs_cis)
-    x = self.ln_f(x)
-    logits = self.lnum_heads(x)
+      h = self.blocks(h, freqs_cis)
+    h = self.ln_f(h)
+    logits = self.self.ln_head(h[:, -1, :])
 
     return logits
 
@@ -280,4 +336,9 @@ config =  LLaMAConfig(max_seq_length = 64,
     embedded_dim = 256)
 
 llama2 = BabyGPTmodel(config)
+
+
+ffw_size = 4 * config.embedded_dim
+flops = count_flops(180194, config, ffw_size)
+print( flops/1e15, "PFLOPS")
 
