@@ -106,6 +106,8 @@ BabyGPT
 │   ├── babyGPT
 │   ├── LoRa
 │   ├── llama_implementation
+│   ├── mixed precision
+
 ├── Train
 |	├── babygpt_trainer.py
 |	├── llama_trainer.py
