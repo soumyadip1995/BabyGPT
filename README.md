@@ -157,7 +157,7 @@ Run the different attention mechanisms from [Attention](https://github.com/soumy
 
 ### Auto Mixed Precision
 
-A very preliminary auto mixed precision has been added. It can be achieved with a cuda enabled gpu. A combination of pytorch's autocast and gradscaler is used for mixed precision. See more in the pytorch tutorial. Unfortunately the gpu blew up during training and cpu for now only supports bfloat16. Takes a hell of a long time to train. If anyone can improve upon it that would be awesome. Check the [Mixed Precision](https://github.com/soumyadip1995/BabyGPT/blob/main/Notebook/mixed_precision.ipynb) Notebook.
+A very preliminary auto mixed precision has been added. FP16/FP32 It can be achieved with a cuda enabled gpu. A combination of pytorch's ```autocast()``` and ```gradscalar()``` is used for mixed precision. See more in the pytorch tutorial. Unfortunately the gpu blew up during training and cpu for now only supports bfloat16. Takes a hell of a long time to train. If anyone can improve upon it that would be awesome. Check the [Mixed Precision](https://github.com/soumyadip1995/BabyGPT/blob/main/Notebook/mixed_precision.ipynb) Notebook.
 
 
 ### Train and Generate :running:
