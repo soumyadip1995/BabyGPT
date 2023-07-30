@@ -31,7 +31,7 @@ Quantization has also been performed on the lora model. A calculation of FLOPs h
 
 ### 1. LLaMa version -1
 
-An implemetation of the [lit-llama](https://github.com/Lightning-AI/lit-llama) model has been ported to BabyGPT(based on llama- version 1). You can find the notebook here -> [llama_implementation](https://github.com/soumyadip1995/BabyGPT/blob/main/Notebook/llama_implementation.ipynb) . Run the model 
+An implemetation of the [lit-llama](https://github.com/Lightning-AI/lit-llama) model has been ported to BabyGPT(based on llama- version 1). You can find the notebook here -> [llama_implementation](https://github.com/soumyadip1995/BabyGPT/blob/main/Notebook/llama_implementation.ipynb) . Run the model , mfu has also been added.
 ```llama\python llama_model_v1.py```. Training and generating tokens has been provided below. 
 
 Note:- We have ported ```build_rope_cache()``` , ```apply_rope()``` and ```RMSNorm()```  from version 1. We are also not using the  version 1 weights or checkpoints(these are for even larger models 7B, 13B, 65B etc). You can download the weights and port llama to your own version.
@@ -41,6 +41,7 @@ Note:- We have ported ```build_rope_cache()``` , ```apply_rope()``` and ```RMSNo
 We have ported [llama2](https://github.com/facebookresearch/llama/blob/main/llama/model.py) by meta into BabyGPT. You can find the implementation at ```llama\python llama2.py```. we have also provided a calculation of FLOPs along with the model.
 
 The FLOPs to compute k, v cache is the flops to compute is :- 2 * 2 * num_layers * (embedded_dim) ^2. Find more information on how to compute memory and compute in [kipply's blog](https://kipp.ly/transformer-inference-arithmetic/#kv-cache)
+MFU has been added to llama2
 
 Note:- We are not using original llama weights by meta. We are also using arbitrary values for 70B. You can port it to your own model using your own weights.
 
@@ -152,6 +153,9 @@ To run a low rank approximation model
 
 To run the llama model
 ```llama\python llama_model_v1.py```
+
+To run llama2
+```llama\python llama2.py```
 
 Run the different attention mechanisms from [Attention](https://github.com/soumyadip1995/BabyGPT/tree/main/Attention) folder.
 
