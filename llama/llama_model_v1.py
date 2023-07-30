@@ -3,7 +3,7 @@
 import math
 from dataclasses import dataclass
 from typing import Optional
-
+import time
 import torch
 import torch.nn as nn
 from torch.nn import functional as F
@@ -12,6 +12,12 @@ from typing_extensions import Self
 
 
 words = open(r"C:\Users\Soumyadip Nandi\Downloads\policy\BabyGPT\data\ALL_eminem.txt", 'r', encoding='utf-8').read()
+chars = sorted(list(set(words)))
+
+vocab_size = len(chars)
+
+block_size = 64
+batch_size = 32
 
 @dataclass
 class LLaMAConfig:
@@ -34,6 +40,9 @@ llama_configs = {
     "65B": dict(num_layers=80, num_heads=64, embedded_dim=8192),
 }
 
+
+
+t0 = time.time()
 
 class AttentionHead(nn.Module):
   def __init__(self, config) -> None:
@@ -197,6 +206,30 @@ class BabyGPTmodel(nn.Module):
               torch.nn.init.normal_(module.weight, mean=0.0, std=0.02 / math.sqrt(2 * self.config.num_layers))
 
 
+    def num_params(self):
+      n_params = sum(p.numel() for p in self.parameters())
+      return n_params
+
+    def model_flops(self, for_back, dt):
+
+      # from https://arxiv.org/pdf/2204.02311.pdf section B
+      cfg = self.config
+      N = self.num_params()
+
+      H = cfg.num_heads
+      Q = cfg.embedded_dim// config.num_heads
+      T = cfg.block_size
+      L = cfg.num_layers
+      flops = 6*N + 12*L*H*Q*T
+      flops_per_for_back = flops * T
+      flops_per_iteration =  for_back * flops_per_for_back
+      flops_received= flops_per_iteration * (1.0/dt) # per second
+      theoretical_flops = 8e12  # tesla t4 has about 8.1 TFLOPS
+      mfu = flops_received / theoretical_flops
+
+      return mfu          
+
+
     def forward(self, idx: torch.Tensor) -> torch.Tensor:
       device = idx.device
       b, t = idx.size()
@@ -215,8 +248,15 @@ class BabyGPTmodel(nn.Module):
         return cls(LLaMAConfig.from_name(name))
 
 config =  LLaMAConfig(block_size = 64,
-    vocab_size = 22127, num_layers  = 4,
+    vocab_size = len(chars), num_layers  = 4,
     num_heads = 4,
     embedded_dim = 256)
 
 llama = BabyGPTmodel(config)
+
+
+t1 = time.time()
+dt = t1 - t0
+mfu = llama.model_flops(batch_size * 1, dt)
+print(mfu)
+print(f" Model Flop Utilization: {mfu*100:.10f}%")
