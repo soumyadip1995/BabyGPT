@@ -36,7 +36,7 @@ An implemetation of the [lit-llama](https://github.com/Lightning-AI/lit-llama) m
 
 Note:- We have ported ```build_rope_cache()``` , ```apply_rope()``` and ```RMSNorm()```  from version 1. We are also not using the  version 1 weights or checkpoints(these are for even larger models 7B, 13B, 65B etc). You can download the weights and port llama to your own version.
 
-### 1. LLaMa2
+### 2. LLaMa2
 
 We have ported [llama2](https://github.com/facebookresearch/llama/blob/main/llama/model.py) by meta into BabyGPT. You can find the implementation at ```llama\python llama2.py```. we have also provided a calculation of FLOPs along with the model.
 
