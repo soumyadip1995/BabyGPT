@@ -2,10 +2,14 @@
 ### from https://github.com/facebookresearch/llama/blob/main/llama/model.py partiallly
 ## we are avoiding flash attention for now.
 
+
+
 import math
 from dataclasses import dataclass
 from typing import Optional
 from typing import List, Optional, Tuple, Any
+import time
+
 
 import torch
 import torch.nn as nn
@@ -54,7 +58,6 @@ class LLaMAConfig:
     batch_size :int = 16
 
 
-
     @classmethod
     def from_name(cls, name: str) -> Self:
         return cls(**llama_configs[name])
@@ -86,6 +89,7 @@ class RMSNorm(torch.nn.Module):
     def forward(self, x):
         output = self._norm(x.float()).type_as(x)
         return output * self.weight
+
 
 
 
@@ -130,7 +134,7 @@ def repeat_kv(x: torch.Tensor, n_rep: int) -> torch.Tensor:
     )
 
 
-
+t0 = time.time()
 class AttentionHead(nn.Module):
   def __init__(self, config: LLaMAConfig):
     super().__init__()
@@ -178,9 +182,9 @@ class AttentionHead(nn.Module):
     # from karpathy
     att = (xq @ xk.transpose(-2, -1)) * (1.0 / math.sqrt(xk.size(-1)))
     att = att.masked_fill(self.tril[:T, :T] == 0, float('-inf'))
-    att = F.softmax(att, dim=-1).type_as(xq)
-    y = torch.matmul(att, xv) # (B, nh, T, T) x (B, nh, T, hs) -> (B, nh, T, hs)
-    y = y.transpose(1, 2).contiguous().view(bsz, seqlen, -1) # re-assemble all head outputs side by side
+    att = F.softmax(att, dim=-1)
+    y = att @ xv # (B, nh, T, T) x (B, nh, T, hs) -> (B, nh, T, hs)
+    y = y.transpose(1, 2).contiguous().view(bsz, seqlen, _) # re-assemble all head outputs side by side
 
     # output projection
     y = self.c_proj(y)
@@ -274,7 +278,7 @@ class BabyGPTmodel(nn.Module):
     self.token = nn.Embedding(config.vocab_size, config.embedded_dim)
     self.dropout = nn.Dropout(config.dropout)
     self.positional_embeddings = nn.Embedding(config.max_seq_length, config.embedded_dim)
-    self.blocks = nn.Sequential() ### use sequential , module list isn't a subclass
+    self.blocks = nn.Sequential()
     for layer_id in range(config.num_layers):
       self.blocks.append(*[Transformer(layer_id, config)])
     self.ln_f = RMSNorm(config.embedded_dim, eps = 1e-12) # final layer norm
@@ -308,7 +312,30 @@ class BabyGPTmodel(nn.Module):
       elif isinstance(module, nn.Embedding):
         torch.nn.init.normal_(module.weight, mean=0.0, std=0.02 / math.sqrt(2 * config.num_layers))
 
-  def forward(self, idx):
+  def num_params(self):
+    n_params = sum(p.numel() for p in self.parameters())
+    return n_params
+
+  def model_flops(self, for_back, dt):
+
+    # from https://arxiv.org/pdf/2204.02311.pdf section B
+    cfg = self.config
+    N = self.num_params()
+
+    H = cfg.num_heads
+    Q = cfg.embedded_dim// config.num_heads
+    T = cfg.max_seq_length
+    L = cfg.num_layers
+    flops = 6*N + 12*L*H*Q*T
+    flops_per_for_back = flops * T
+    flops_per_iteration =  for_back * flops_per_for_back
+    flops_received= flops_per_iteration * (1.0/dt) # per second
+    theoretical_flops = 8e12  # tesla t4 has about 8.1 TFLOPS
+    mfu = flops_received / theoretical_flops
+
+    return mfu
+
+  def forward(self, idx, freqs_cis):
     device = idx.device
     _bsz, seqlen = idx.size()
     tok_emb = self.token(idx)
@@ -341,4 +368,8 @@ llama2 = BabyGPTmodel(config)
 ffw_size = 4 * config.embedded_dim
 flops = count_flops(180194, config, ffw_size)
 print( flops/1e15, "PFLOPS")
-
+t1 = time.time()
+dt = t1 - t0
+mfu = llama2.model_flops(batch_size * 1, dt)
+print(mfu)
+print(f" Model Flop Utilization: {mfu*100:.10f}%")
