@@ -18,12 +18,8 @@ from typing_extensions import Self
 
 
 words = open(r"C:\Users\Soumyadip Nandi\Downloads\policy\BabyGPT\data\ALL_eminem.txt", 'r', encoding='utf-8').read()
-
-
 block_size = 64
 batch_size = 32
-
-
 chars = sorted(list(set(words)))
 
 vocab_size = len(chars)
@@ -91,7 +87,7 @@ class RMSNorm(torch.nn.Module):
         return output * self.weight
 
 
-
+## freq_cos anbd frreal and the imaginary part.
 
 def precompute_freqs_cis(embedded_dim: int, end: int, theta: float = 10000.0):
     freqs = 1.0 / (theta ** (torch.arange(0, embedded_dim, 2)[: (embedded_dim // 2)].float() / embedded_dim))
@@ -210,8 +206,6 @@ class FeedForward(nn.Module):
     return x
 
 
-
-
 class Transformer(nn.Module):
   def __init__(self,  layer_id : int, config: LLaMAConfig) -> None:
     super().__init__()
@@ -232,7 +226,6 @@ class Transformer(nn.Module):
 
 
 seq_len = data.size()
-
 
 def  count_flops(seq_len, config: LLaMAConfig,  ffw_size):
 
