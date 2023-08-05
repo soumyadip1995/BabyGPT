@@ -265,8 +265,12 @@ You can use it under GNU, Apache and MIT.
 
 ### TO DO
 
-1. Try out quantization for Lora 
-2. analysing the different performance benchmarks for the models.
+1. look into triton
+2. Fix the readme.md
+3. Inference using libtorch or each separately
+4. look into sentencepiece and tokenizer
+5. look into tinystories
+
 
 
 
