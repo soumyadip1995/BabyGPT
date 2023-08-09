@@ -45,6 +45,10 @@ MFU has been added to llama2
 
 Note:- We are not using original llama weights by meta. We are also using arbitrary values for 70B. You can port it to your own model using your own weights.
 
+#### Tokenization
+
+Tokenization using sentencepiece has been done. We are exporting a ```tokenizer.bin``` unlike the tokenizer the quant folder. (meta-pieces added) Look in the [llama](https://github.com/facebookresearch/llama/blob/main/llama/)folder. We can use the .bin file for further inference.
+
 ### LLaMA with Model FLOP Utilization(MFU) :zap:
 
 We need efficient memory usage for LLMs. Hardware accelerators use a technique called Hardware FLOP Utilization for efficient trade-offs between memory usage and compute. This is typically done using an estimate of the ratio of FLOPs observed on a given
@@ -58,7 +62,7 @@ LLMs  require  many GPUs to run, we need to find ways to reduce these requiremen
 To remediate that,  8-bit quantization was introduced. This method uses a quarter precision, thus needing only 1/4th of the model size! But it's not done by just dropping another half of the bits. There's a lot more to this topic. Look at hugging face quantization.
 
 You can see [quant.md](https://github.com/soumyadip1995/BabyGPT/blob/main/quant/quant.md) on how to perform llama-quantization. You can look at [quantization Notebook](https://github.com/soumyadip1995/BabyGPT/blob/main/quant/Quantization.ipynb) for a beginner's introduction to quantization. Different benchmarkings has been done.  For ex:- On a GPU, the 7B parametre model on bfloat16 will take about 15GB. BabyGPT will take about a few kilobytes..!!!
-```quantization.py``` has been obtained from lit-llama repo.
+```quantization.py``` has been obtained from lit-llama repo. A tokenizer using sentencepiece has been added as well. Diffrent kinds of weight operations can be performed from the tokenizer.model
 
 ### Our result
 For post training quantization, we are able to reduce the model size by a factor of almost 4.
@@ -120,11 +124,16 @@ BabyGPT
 │   ├── quantization notebook
 │   ├── tokenizer.model
 │   ├── tokenizer.vocab
+│   ├── tokenizer.py
 │   ├── model.pth
 │   ├── quant.md
 ├── llama
 │   ├── llama2.py
 │   ├── llama_model_v1.py
+│   ├── tokenizer.py
+│   ├── tokenizer.vocab
+│   ├── tokenizer.bin
+│   ├── tokenizer.model
 ├── text.txt
 ├── trainer.ipynb
 
