@@ -47,7 +47,7 @@ Note:- We are not using original llama weights by meta. We are also using arbitr
 
 #### Tokenization
 
-Tokenization using sentencepiece has been done. We are exporting a ```tokenizer.bin``` unlike the tokenizer the quant folder. (meta-pieces added) Look in the [llama](https://github.com/facebookresearch/llama/blob/main/llama/)folder. We can use the .bin file for further inference.
+Tokenization using sentencepiece has been done. We are exporting a ```tokenizer.bin``` unlike the tokenizer the quant folder. Run it in ```llama\python tokenizer.py```(meta-pieces added) . We can use the .bin file for further inference.
 
 ### LLaMA with Model FLOP Utilization(MFU) :zap:
 
