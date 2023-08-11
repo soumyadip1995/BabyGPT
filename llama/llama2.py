@@ -366,3 +366,16 @@ dt = t1 - t0
 mfu = llama2.model_flops(batch_size * 1, dt)
 print(mfu)
 print(f" Model Flop Utilization: {mfu*100:.10f}%")
+
+
+# Print model's state_dict
+print("Model's state_dict:")
+for param_tensor in llama2.state_dict():
+    print(param_tensor, "\t", llama2.state_dict()[param_tensor].size())
+
+
+torch.save(llama2.state_dict(), 'C:/Users/Soumyadip Nandi/Downloads/policy/BabyGPT/llama/llama2_model.pth')
+
+
+llama2.load_state_dict(torch.load('C:/Users/Soumyadip Nandi/Downloads/policy/BabyGPT/llama/llama2_model.pth'))
+print(llama2.eval())
