@@ -12,7 +12,7 @@ Table of contents
    * [Low Rank Approximation](#low-rank-approximation)
       * [Quantization on low rank approximation](#quantization-on-low-rank-approximation)
    * [We support LLaMa for BabyGPT :zap: :zap:](#we-support-llama-for-babygpt-zap-zap)
-      * [LLaMa version 1 :llama:](#llama-version-1)
+      * [LLaMa version 1 :llama:](#llama-version-1-llama)
       * [LLaMa2 :unicorn:](#llama2-unicorn)
            * [Tokenization](#tokenization)
    * [LLaMA with Model FLOP Utilization(MFU) :zap:](#llama-with-model-flop-utilization(mfu)-zap)
