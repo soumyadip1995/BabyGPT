@@ -1,8 +1,34 @@
 # BabyGPT :baby_chick:
 
 <p align="center">
-  <img src="https://github.com/soumyadip1995/BabyGPT/blob/main/image/chg.png" alt="Sublime's custom image"/>
+  <img src="https://github.com/soumyadip1995/BabyGPT/blob/main/image/gpt.png" alt="Sublime's custom image"/>
 </p>
+
+Table of contents
+=================
+
+<!--ts-->
+   * [The Roadmap :rocket:]()
+   * [Low Rank Approximation]()
+      * [Quantization on low rank approximation]()
+   * [We support LLaMa for BabyGPT :zap: :zap:]()
+      * [LLaMa version 1 :llama:]()
+      * [LLaMa2 :unicorn:]()
+           * [Tokenization]()
+   * [LLaMA with Model FLOP Utilization(MFU) :zap:]()
+   * [Quantization]()
+   * [Our result]()
+   * [Performance Benchmark]()
+   * [Files]()
+   * [Run :running:]()
+   * [Auto mixed Prescision]()
+   * [Train and Generate :running:]()
+   * [Results :clipboard:]()
+   * [Data]()
+   * [Running the notebooks]()
+   * [Acknowledgement]()
+   * [License]()
+<!--te-->
 
 Building on the intuition of Karpathy's [ng-video-lectures](https://github.com/karpathy/ng-video-lecture/blob/master/gpt.py) and [mingpt](https://github.com/soumyadip1995/minGPT/blob/master/mingpt), BabyGPT provides a working model of a GPT on a much smaller scale (256 as well as 16 out channels, 5 layer GPT, fine-tuned). BabyGPT has been built from a [toyGPT](https://github.com/soumyadip1995/language-models/blob/main/Notebook/GPT_from_scratch.ipynb) which was made to understand transformers from scratch. It has been scaled down , as you will see below. Visit the notebooks. We scale up to transformers from simple Language models, attention mechanisms and finally BabyGPT. While [toyGPT](https://github.com/soumyadip1995/language-models/blob/main/Notebook/GPT_from_scratch.ipynb) has been built by separating all the layers of a transformer indiviually. In BabyGPT, the attention mechanism is implemented manually. 
 The purpose of building smaller GPTs is to understand transformer functions at a much more granular level.
@@ -29,14 +55,14 @@ Quantization has also been performed on the lora model. A calculation of FLOPs h
 ## We support LLaMa for BabyGPT :zap: :zap:
 
 
-### 1. LLaMa version -1
+### 1. LLaMa version -1 :llama:
 
 An implemetation of the [lit-llama](https://github.com/Lightning-AI/lit-llama) model has been ported to BabyGPT(based on llama- version 1). You can find the notebook here -> [llama_implementation](https://github.com/soumyadip1995/BabyGPT/blob/main/Notebook/llama_implementation.ipynb) . Run the model , mfu has also been added.
 ```llama\python llama_model_v1.py```. Training and generating tokens has been provided below. 
 
 Note:- We have ported ```build_rope_cache()``` , ```apply_rope()``` and ```RMSNorm()```  from version 1. We are also not using the  version 1 weights or checkpoints(these are for even larger models 7B, 13B, 65B etc). You can download the weights and port llama to your own version.
 
-### 2. LLaMa2
+### 2. LLaMa2 :unicorn:
 
 We have ported [llama2](https://github.com/facebookresearch/llama/blob/main/llama/model.py) by meta into BabyGPT. You can find the implementation at ```llama\python llama2.py```. we have also provided a calculation of FLOPs along with the model.
 
