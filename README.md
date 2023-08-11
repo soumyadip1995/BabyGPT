@@ -8,8 +8,8 @@ Table of contents
 =================
 
 <!--ts-->
-   * [The Roadmap :rocket:]()
-   * [Low Rank Approximation]()
+   * [The Roadmap :rocket:](#the-roadmap-rocket)
+   * [Low Rank Approximation](#low-rank-approximation)
       * [Quantization on low rank approximation]()
    * [We support LLaMa for BabyGPT :zap: :zap:]()
       * [LLaMa version 1 :llama:]()
