@@ -15,7 +15,7 @@ Table of contents
       * [LLaMa version 1 :llama:](#llama-version-1-llama)
       * [LLaMa2 :unicorn:](#llama2-unicorn)
            * [Tokenization](#tokenization)
-   * [LLaMA with Model FLOP Utilization(MFU) :zap:](#llama-with-model-flop-utilization(mfu)-zap)
+      * [LLaMA with Model FLOP Utilization(MFU) :zap:](#llama-with-model-flop-utilization(mfu)-zap)
    * [Quantization](#quantization)
    * [Our result](#our-result)
    * [Performance Benchmark](#performance-benchmark)
