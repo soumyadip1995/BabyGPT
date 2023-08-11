@@ -22,7 +22,7 @@ Table of contents
    * [Files](#files)
    * [Run :running:](#run-running)
    * [Auto mixed Prescision](#auto-mixed-precision)
-   * [Train and Generate :running:](#train-and-generate)
+   * [Train and Generate :running:](#train-and-generate-running)
    * [Results :clipboard:](#results-clipboard)
    * [Data](#data)
    * [Running the notebooks](#running-the-notebooks)
