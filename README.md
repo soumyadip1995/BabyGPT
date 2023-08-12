@@ -36,15 +36,16 @@ The purpose of building smaller GPTs is to understand transformer functions at a
 
 ## The models
 
-To train small models we are using tinystories. You can download the weights from hugging face. We are setting max_iters to 5000 on a Tesla T4.
+To train small models we are using tinystories. You can download the weights from hugging face. We are setting max_iters to 5000 on a Tesla T4. For the OG model, we are using 256 out channels.
 
 | model    | context length|n_layers |n_head        |n_embd    | train loss | val loss  | parametres| data      |
 | ---------| --------------|---------| -------------|----------|------------|-----------|-----------|-----------|
 | 15M      | 16            |4        | 4            |16        |2.4633      |2.4558     |13k        |[stories15M.bin](https://huggingface.co/karpathy/tinyllamas/resolve/main/stories15M.bin)|
 | 42M      | 32            |8        | 8            |32        |2.3772      |2.3821     |1.01M      |[stories42M.bin](https://huggingface.co/karpathy/tinyllamas/resolve/main/stories42M.bin)|
-|BabyGPT OG| 64            |8        | 8            |256       |------------|-----------|6.37M      |[data](https://github.com/soumyadip1995/BabyGPT/tree/main/data/ALL_eminem.txt)|
+|BabyGPT 
+Original   | 64            |8        | 8            |256       |1.4345      |1.6084     |6.37M      |[data](https://github.com/soumyadip1995/BabyGPT/tree/main/data/ALL_eminem.txt)|
 
-Note:- The 110M is being omitted for now. The RAM blew up..!!
+Note:- The 110M is being omitted for now. The RAM blew up..!! 
 
 ## The Roadmap :rocket:
 
