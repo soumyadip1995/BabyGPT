@@ -8,6 +8,7 @@ Table of contents
 =================
 
 <!--ts-->
+   * [The models](#the-models)
    * [The Roadmap :rocket:](#the-roadmap-rocket)
    * [Low Rank Approximation](#low-rank-approximation)
       * [Quantization on low rank approximation](#quantization-on-low-rank-approximation)
@@ -33,10 +34,21 @@ Table of contents
 Building on the intuition of Karpathy's [ng-video-lectures](https://github.com/karpathy/ng-video-lecture/blob/master/gpt.py) and [mingpt](https://github.com/soumyadip1995/minGPT/blob/master/mingpt), BabyGPT provides a working model of a GPT on a much smaller scale (256 as well as 16 out channels, 5 layer GPT, fine-tuned). BabyGPT has been built from a [toyGPT](https://github.com/soumyadip1995/language-models/blob/main/Notebook/GPT_from_scratch.ipynb) which was made to understand transformers from scratch. It has been scaled down , as you will see below. Visit the notebooks. We scale up to transformers from simple Language models, attention mechanisms and finally BabyGPT. While [toyGPT](https://github.com/soumyadip1995/language-models/blob/main/Notebook/GPT_from_scratch.ipynb) has been built by separating all the layers of a transformer indiviually. In BabyGPT, the attention mechanism is implemented manually. 
 The purpose of building smaller GPTs is to understand transformer functions at a much more granular level.
 
+## The models
+
+To train small models we are using tinystories. You can download the weights from hugging face. We are setting max_iters to 5000 on a Tesla T4.
+
+| model    | context length|n_layers |n_head        |n_embd    | train loss | val loss  | parametres| data      |
+| ---------| --------------|---------| -------------|----------|------------|-----------|-----------|-----------|
+| 15M      | 16            |4        | 4            |16        |2.4633      |2.4558     |13k        |[stories15M.bin](https://huggingface.co/karpathy/tinyllamas/resolve/main/stories15M.bin)|
+| 42M      | 32            |8        | 8            |32        |2.3772      |2.3821     |1.01M      |[stories42M.bin](https://huggingface.co/karpathy/tinyllamas/resolve/main/stories42M.bin)|
+|BabyGPT OG| 64            |8        | 8            |256       |------------|-----------|6.37M      |[data](https://github.com/soumyadip1995/BabyGPT/tree/main/data/ALL_eminem.txt)|
+
+Note:- The 110M is being omitted for now. The RAM blew up..!!
 
 ## The Roadmap :rocket:
 
-If you wish to understand the nitty gritty of how transformers  work from scratch, this roadmap will guide you. We start from implementing simple language models and work our way up to building transformers , a GPT from scratch and then finally babyGPT. 
+If you wish to understand the nitty gritty of how transformers  work from scratch, this roadmap will guide you. We start from implementing simple language models bigram and ngram and then from there work our way up to building transformers , a GPT from scratch and then finally babyGPT. 
 
 ![alt_text](https://github.com/soumyadip1995/BabyGPT/blob/main/image/img3.JPG)
 
