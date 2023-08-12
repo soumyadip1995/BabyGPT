@@ -42,8 +42,7 @@ To train small models we are using tinystories. You can download the weights fro
 | ---------| --------------|---------| -------------|----------|------------|-----------|-----------|-----------|
 | 15M      | 16            |4        | 4            |16        |2.4633      |2.4558     |13k        |[stories15M.bin](https://huggingface.co/karpathy/tinyllamas/resolve/main/stories15M.bin)|
 | 42M      | 32            |8        | 8            |32        |2.3772      |2.3821     |1.01M      |[stories42M.bin](https://huggingface.co/karpathy/tinyllamas/resolve/main/stories42M.bin)|
-|BabyGPT 
-Original   | 64            |8        | 8            |256       |1.4345      |1.6084     |6.37M      |[data](https://github.com/soumyadip1995/BabyGPT/tree/main/data/ALL_eminem.txt)|
+|BabyGPT Original   | 64            |8        | 8            |256       |1.4345      |1.6084     |6.37M      |[data](https://github.com/soumyadip1995/BabyGPT/tree/main/data/ALL_eminem.txt)|
 
 Note:- The 110M is being omitted for now. The RAM blew up..!! 
 
