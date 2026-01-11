@@ -27,6 +27,7 @@ Table of contents
    * [Results :clipboard:](#results-clipboard)
    * [Data](#data)
    * [Running the notebooks](#running-the-notebooks)
+   * [Mechanistic Interpretability](#mechanistic-interpretability)
    * [Acknowledgements](#acknowledgements)
    * [Licenses](#licenses)
 <!--te-->
