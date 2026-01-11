@@ -149,6 +149,8 @@ BabyGPT
 │   ├── LoRa
 │   ├── llama_implementation
 │   ├── mixed precision
+│   ├── mechanistic Interpretability
+│   ├── Additional BabyGPT
 
 ├── Train
 |	├── babygpt_trainer.py
@@ -285,12 +287,24 @@ The [data](https://github.com/soumyadip1995/BabyGPT/tree/main/data) folder conta
 | LoRa                    | [colab](https://github.com/soumyadip1995/BabyGPT/blob/main/Notebook/lora.ipynb)(256 out channels)|
 | lit-llama for BabyGPT                   | [colab](https://github.com/soumyadip1995/BabyGPT/blob/main/Notebook/llama_implementation.ipynb)(16 out channels for lit-llama )|
 | trainer for Babygpt and llama                   | [colab](https://github.com/soumyadip1995/BabyGPT/blob/main/trainer.ipynb)(16 out channels for BabyGPT , 256 out channels for llama)|
+| Mechanistic Interpretability Code                 | [colab](https://github.com/soumyadip1995/BabyGPT/blob/main/Notebook/Mechanistic_Interpretability_code.ipynb)|
+| Additional BabyGPT                  | [colab](https://github.com/soumyadip1995/BabyGPT/blob/main/Notebook/Additional_BabyGPT.ipynb)|
 
 
 ```text.txt ``` is based on Eminem's Stan. 
 
 
+## Mechanistic Interpretability
 
+Features are one of the most fundamental properties of Neural Networks. If you think of a direction vector in a vector space of activations of neurons in a given layer , this can correspond to directions in within a feature space. Even though, indiviual neurons can be studied, these features can be connected by weights forming circuits.
+
+The circuits can be thought of as computational graphs that consist of a  set of features, and the weighted edges that go between them in the original network. The question here is- are these vector spaces of neurons understandable ?. Can these indiviual neurons be studied ?. The answer lies in mechanistically interpreting these circuits at a deeper level.
+
+Making use of the vector space  of neurons, in particular their weights, one can contextualize the weights in a broader context of the network *C.Olah et.al, 2018* . The challenge of contextualization is a recurring one in understanding neural networks: we can easily observe every activation, every weight, and every gradient; the challenge lies in determining what those values represent. In the [Mechanistic Interpretability](https://github.com/soumyadip1995/BabyGPT/blob/main/Notebook/Mechanistic_Interpretability_code.ipynb) Notebook , we have used  an example where we are loading a pre-trained VGG16  and selecting a convolutional layer an channel inside of it. A random input image of a dog is used. We are optimizing the pixels (via gradient ascent) to maximize activation of that neuron channel. Then the resulting synthetic image is displayed. The result is usually a patterned texture (e.g., stripes, curves, eyes), showing what kind of input strongly excites that channel. 
+
+### Reverse Engineering 
+
+Mechanistic interpretability treats a neural network like a compiled program or electronic circuit. Instead of treating it as a black box (input → output correlations), we try to open the hood and explain the exact algorithms being implemented by the weights, neurons, and attention heads. This is reverse engineering in the same sense as analyzing a compiled binary. To demonstrate toy mechanistic interpretability, we can train BabyGPT to learn modular addition ```(a + b) mod N ``` . In the [Additional BabyGPT Notebook](https://github.com/soumyadip1995/BabyGPT/blob/main/Notebook/Additional_BabyGPT.ipynb) we have implemented modular addition to show which attention heads/neurons implement addition and how to trace the “circuit.” This has been done using Attention Inspection:- To visualize which input token the last layer attends and linear probe.- probing to check whether  hidden states linearly encode ```(a + b) mod N ```.  This has been adopted from the works of *Nanda et al., Progress on Induction Heads, 2022*, toy mechanistic models. We have also implemented Linear Probe
 
 ### Acknowledgements
 
